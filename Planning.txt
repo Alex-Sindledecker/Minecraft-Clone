@@ -1,0 +1,95 @@
+End goal:
+    Spawn in a randomly generated world and gather materials to build a house. After building a house,
+    make a bed and sleep in it to skip to day
+-----------------------------------------------------------------------------------------------------------------------
+
+Requirements:
+    * Terrain collision detection
+    * Trees/plants
+    * Water
+        * Flat plane with normal mapping
+    * Scalable window
+    * Menus
+        * Title Screen
+        * Settings screen
+    * Day/night cycle
+    * Health bar and hunger bar
+    * Inventory
+    * Bed that supports sleeping
+    * Breaking and placing blocks
+    * Shadow casting
+-----------------------------------------------------------------------------------------------------------------------
+
+Technology required
+    * Framebuffers
+    * Space partioning algorithm (possibly oct-trees)
+    * Texture atlasing
+    * Dynamicly updated vbos
+    * Ray caster/picker
+    * Dynamic skybox
+    * Resource manager
+    * Debugging options
+        * Logging to the console
+        * Detailed error messages and event notifications
+    * Event system
+    * 16 x 16 x 16 chunks
+    * n chunks high?
+    * Create chunk meshes
+        * Greedy meshing
+        * Hide all invisible faces
+        * All blocks must be textured using a texture atlas
+    * Text rendering
+    * Perlin noise terrain height mapping
+-----------------------------------------------------------------------------------------------------------------------
+
+Other important stuff
+    * All components should be loosley coupled
+-----------------------------------------------------------------------------------------------------------------------
+
+Building the world
+    * A terrain object stores all the blocks in the current render distance. Assuming a render distance of 32 chunks, 
+      with a world height of 16 chunks, then there would be 67,108,864 blocks stored. Although that sounds like a lot,
+      the size of one block can be as little as one byte meaning you would only use 67mb of memory. The main bottleneck
+      would stem from the gpu. All 67 million of these blocks would be stored in an single dimensional array that is
+      updated as the player moves around the world. A simple method "getBlock(x, y, z)" converts the x, y, z parameters
+      to an index and returns the block at that location.
+    * A block has an id and a state which are both one byte in size.
+    * Chunks are responsible for building a mesh depending on what blocks are at their location. The location is
+      determined by making a request to the terrain generator. This is so, chunks don't have to know about each
+      other when building parts of their mesh that might touch another mesh
+-----------------------------------------------------------------------------------------------------------------------
+
+Possible objects:
+    * Window
+        - Opens and closes
+        - Initalizes opengl and default settings that can't be changed
+    * ResourceManager
+        - Load textures, shaders, audio if there is any, any other external files needed
+    * Scene
+        - init method called at game start and gets any resources the scene needs
+        - run method called once whenever the game class decides that it needs to run
+            =====Code possibility=====
+            string run()
+            {
+                int exit_invoked = 0;
+
+                //Game loop
+                while (exit_invoked == 0)
+                {
+                    doEventStuff(params)
+
+                    if (different_scene_button_clicked)
+                    {
+                        exit_invoked = different_scene_button.id;
+                    }
+                }
+
+                if (exit_invoked == different_scene_button.id)
+                {
+                    return "name_of_scene_that_is_next"
+                }
+            }
+            ======================
+    * Game
+        - Determines which scene should be displayed
+        - Processes events
