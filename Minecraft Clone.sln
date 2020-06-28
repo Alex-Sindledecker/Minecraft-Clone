@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29920.165
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Minecraft Clone", "Minecraft Clone\Minecraft Clone.vcxproj", "{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}.Debug|x64.ActiveCfg = Debug|x64
+		{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}.Debug|x64.Build.0 = Debug|x64
+		{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}.Debug|x86.ActiveCfg = Debug|Win32
+		{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}.Debug|x86.Build.0 = Debug|Win32
+		{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}.Release|x64.ActiveCfg = Release|x64
+		{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}.Release|x64.Build.0 = Release|x64
+		{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}.Release|x86.ActiveCfg = Release|Win32
+		{BA6D2EEA-1AAC-47E0-8B92-4F3E3B805014}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {632BC895-DDCC-4B5F-91A3-2D6E6121C9DE}
+	EndGlobalSection
+EndGlobal
