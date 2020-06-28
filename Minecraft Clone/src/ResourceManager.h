@@ -3,31 +3,19 @@
 #include <unordered_map>
 #include <string>
 
-class Resource
-{
-public:
-	virtual ~Resource() {}
-	virtual void init(const char* src) 
-	{
-		was_initalized = true;
-	};
+#include "Shader.h"
 
-	bool was_initalized;
-};
-
-typedef std::shared_ptr<Resource> ResourcePtr;
+typedef std::shared_ptr<Shader> ShaderPtr;
 
 class ResourceManager
 {
 public:
-	static ResourcePtr get(std::string name);
-	static void del(std::string name);
+	static ShaderPtr getShader(std::string name);
 
 private:
 	ResourceManager() {}
 	ResourceManager(const ResourceManager&) {}
 	~ResourceManager() {}
 
-	static std::unordered_map<std::string, ResourcePtr> resources;
+	static std::unordered_map<std::string, ShaderPtr> shaders;
 };
-

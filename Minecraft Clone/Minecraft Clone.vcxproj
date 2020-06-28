@@ -171,6 +171,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\ResourceManager.cpp" />
+    <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="vendor\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -184,7 +185,13 @@
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\toolbox.h" />
     <ClInclude Include="src\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\block_fragment.glsl" />
+    <None Include="res\shaders\block_vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

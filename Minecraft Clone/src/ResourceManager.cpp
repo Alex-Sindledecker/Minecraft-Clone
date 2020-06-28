@@ -1,20 +1,14 @@
 #include "pch.h"
 #include "ResourceManager.h"
 
-std::unordered_map<std::string, ResourcePtr> ResourceManager::resources;
+std::unordered_map<std::string, ShaderPtr> ResourceManager::shaders;
 
-ResourcePtr ResourceManager::get(std::string name)
+ShaderPtr ResourceManager::getShader(std::string name)
 {
-	if (resources.find(name) == resources.end())
+	if (shaders.find(name) == shaders.end())
 	{
-		resources[name] = ResourcePtr(new Resource);
-		resources[name]->was_initalized = false;
+		shaders[name] = ShaderPtr(new Shader);
 	}
 
-	return resources[name];
-}
-
-void ResourceManager::del(std::string name)
-{
-	resources.erase(name);
+	return shaders[name];
 }

@@ -1,0 +1,33 @@
+#pragma once
+
+#include <string>
+#include <fstream>
+
+#include "Logger.h"
+
+namespace toolbox
+{
+
+	std::string readFile(const char* src)
+	{
+		std::string content = "";
+		std::ifstream file;
+		file.open(src);
+		if (file.is_open())
+		{
+			std::string line;
+			while (std::getline(file, line))
+			{
+				content += line + '\n';
+			}
+		}
+		else
+		{
+			CONSOLE_LOG_ERROR("toolbox.h", "Failed to open file " << src);
+		}
+		file.close();
+
+		return content;
+	}
+
+}
