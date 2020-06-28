@@ -1,4 +1,5 @@
 *.user
+DebugLog.txt
 /bin
 /int
 /.vs
