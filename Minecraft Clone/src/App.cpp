@@ -9,7 +9,7 @@ int main()
 	ResourceManager::getShader("mainShader")->init("res/shaders/block_vertex.glsl", "res/shaders/block_fragment.glsl");
 	ResourceManager::getTexture2D("myTexture")->init("res/tex/sample.png");
 
-	glClearColor(0.12f, 0.3f, 0.78f, 1.f);
+	glClearColor(0.12f, 0.23f, 0.68f, 1.f);
 	while (window.closeButtonPressed() == false)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);

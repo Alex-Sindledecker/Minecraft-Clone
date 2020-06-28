@@ -53,7 +53,7 @@ void Texture2D::init(const char* src)
 		format = GL_RG;
 		break;
 	}
-	glTexImage2D(GL_TEXTURE_2D, 8, GL_RGBA, width, height, 0, format, GL_UNSIGNED_BYTE, pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, pixels);
 	stbi_image_free(pixels);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
