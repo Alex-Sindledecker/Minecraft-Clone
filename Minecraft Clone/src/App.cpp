@@ -1,18 +1,67 @@
 #include "pch.h"
 #include "ResourceManager.h"
+#include "Terrain.h"
 #include "Window.h"
+
+#include <thread>
+
+void drawAThing()
+{
+	static GLfloat vertices[] = {
+		1.f, 1.f,
+		0.f, 1.f,
+		0.f, 0.f,
+
+		0.f, 0.f,
+		1.f, 0.f,
+		1.f, 1.f
+	};
+	static GLuint vao = 0, vbo;
+	if (vao == 0)
+	{
+		glGenVertexArrays(1, &vao);
+		glGenBuffers(1, &vbo);
+		glBindBuffer(GL_ARRAY_BUFFER, vbo);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		glBindVertexArray(vao);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (void*)0);
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
+	glBindVertexArray(vao);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glBindVertexArray(0);
+}
 
 int main()
 {
 	Window window(1280, 720, "Minecraft 2");
 
-	ResourceManager::getShader("mainShader")->init("res/shaders/block_vertex.glsl", "res/shaders/block_fragment.glsl");
-	ResourceManager::getTexture2D("myTexture")->init("res/tex/sample.png");
+	ShaderPtr mainShader = ResourceManager::getShader("mainShader");
+	Texture2DPtr myTexture = ResourceManager::getTexture2D("myTexture");
 
-	glClearColor(0.12f, 0.23f, 0.68f, 1.f);
+	mainShader->init("res/shaders/block_vertex.glsl", "res/shaders/block_fragment.glsl");
+	myTexture->init("res/tex/sample.png");
+
+	glm::mat4 projection = glm::perspective(glm::radians(70.f), window.getSize().x / window.getSize().y, 0.1f, 100.f);
+	glm::mat4 view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+
+	Terrain terrain(NULL, 32);
+
+	glClearColor(0.f, 0.1f, 0.3f, 1.f);
 	while (window.closeButtonPressed() == false)
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		mainShader->use();
+		mainShader->setUniformMatrix4("projection", projection);
+		mainShader->setUniformMatrix4("view", view);
+		mainShader->setUniformMatrix4("model", glm::mat4(1.f));
+		myTexture->bind();
+		drawAThing();
 
 		window.update();
 	}

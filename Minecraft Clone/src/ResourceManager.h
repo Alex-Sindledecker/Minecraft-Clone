@@ -7,6 +7,7 @@
 #include "Texture.h"
 
 typedef std::shared_ptr<Shader> ShaderPtr;
+typedef std::shared_ptr<Texture> TexturePtr;
 typedef std::shared_ptr<Texture2D> Texture2DPtr;
 typedef std::shared_ptr<Texture3D> Texture3DPtr;
 

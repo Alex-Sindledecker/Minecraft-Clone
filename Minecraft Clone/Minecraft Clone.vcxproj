@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\Shader.cpp" />
+    <ClCompile Include="src\Terrain.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="vendor\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -184,6 +185,8 @@
     <ClCompile Include="vendor\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +194,7 @@
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\Terrain.h" />
     <ClInclude Include="src\Texture.h" />
     <ClInclude Include="src\toolbox.h" />
     <ClInclude Include="src\Window.h" />
