@@ -13,7 +13,7 @@ Texture2D::~Texture2D()
 
 void Texture2D::bind()
 {
-	glBindTexture(GL_TEXTURE_2D, id);
+	glBindTexture(GL_TEXTURE_2D, m_id);
 }
 
 void Texture2D::unbind()
@@ -23,8 +23,8 @@ void Texture2D::unbind()
 
 void Texture2D::init(const char* src)
 {
-	glGenTextures(1, &id);
-	glBindTexture(GL_TEXTURE_2D, id);
+	glGenTextures(1, &m_id);
+	glBindTexture(GL_TEXTURE_2D, m_id);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);

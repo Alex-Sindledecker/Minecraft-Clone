@@ -5,7 +5,7 @@
 class Shader
 {
 public:
-	Shader() : id(0) {}
+	Shader() : m_id(0) {}
 	~Shader();
 
 	void use();
@@ -19,5 +19,5 @@ public:
 private:
 	GLuint genShaderComponent(const char* src, GLenum type);
 
-	GLuint id;
+	GLuint m_id;
 };

@@ -15,30 +15,30 @@ Terrain::~Terrain()
 
 void Terrain::setRenderDistance(unsigned int dist)
 {
-	render_dist = dist;
-	int totalBlocks = render_dist * render_dist * pow(CHUNK_SIZE, 4);
-	blocks.resize(totalBlocks);
+	m_render_dist = dist;
+	int totalBlocks = m_render_dist * m_render_dist * pow(CHUNK_SIZE, 4);
+	m_blocks.resize(totalBlocks);
 }
 
 Block Terrain::getBlock(int x, int y, int z)
 {
-	return blocks[flattenIndex(x, y, z)];
+	return m_blocks[flattenIndex(x, y, z)];
 }
 
 void Terrain::setBlock(Block block, int x, int y, int z)
 {
-	blocks[flattenIndex(x, y, z)] = block;
+	m_blocks[flattenIndex(x, y, z)] = block;
 }
 
 void Terrain::update(glm::vec3 pos)
 {
 	for (int y = 0; y < CHUNK_SIZE * CHUNK_SIZE; y++)
 	{
-		for (int x = 0; x < render_dist * CHUNK_SIZE; x++)
+		for (int x = 0; x < m_render_dist * CHUNK_SIZE; x++)
 		{
-			for (int z = 0; z < render_dist * CHUNK_SIZE; z++)
+			for (int z = 0; z < m_render_dist * CHUNK_SIZE; z++)
 			{
-				blocks[flattenIndex(x, y, z)] = getNoiseBlock(x, y, z);
+				m_blocks[flattenIndex(x, y, z)] = getNoiseBlock(x, y, z);
 			}
 		}
 	}
@@ -46,7 +46,7 @@ void Terrain::update(glm::vec3 pos)
 
 int Terrain::flattenIndex(int x, int y, int z) const
 {
-	int size = render_dist * CHUNK_SIZE;
+	int size = m_render_dist * CHUNK_SIZE;
 	int y_size = CHUNK_SIZE * CHUNK_SIZE;
 	return z * size * y_size + y * size + x;
 }

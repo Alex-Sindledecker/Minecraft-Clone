@@ -29,6 +29,6 @@ private:
 	int flattenIndex(int x, int y, int z) const;
 	Block getNoiseBlock(int x, int y, int z) const;
 
-	std::vector<Block> blocks;
-	unsigned int render_dist;
+	std::vector<Block> m_blocks;
+	unsigned int m_render_dist;
 };

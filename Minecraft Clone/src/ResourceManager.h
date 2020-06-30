@@ -23,7 +23,7 @@ private:
 	ResourceManager(const ResourceManager&) {}
 	~ResourceManager() {}
 
-	static std::unordered_map<std::string, ShaderPtr> shaders;
-	static std::unordered_map<std::string, Texture2DPtr> textures2;
-	static std::unordered_map<std::string, Texture3DPtr> textures3;
+	static std::unordered_map<std::string, ShaderPtr> m_shaders;
+	static std::unordered_map<std::string, Texture2DPtr> m_textures2;
+	static std::unordered_map<std::string, Texture3DPtr> m_textures3;
 };

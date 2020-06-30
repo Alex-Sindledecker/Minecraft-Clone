@@ -2,6 +2,7 @@
 #include "ResourceManager.h"
 #include "Terrain.h"
 #include "Window.h"
+#include "Camera.h"
 
 #include <thread>
 
@@ -50,20 +51,44 @@ int main()
 	glm::mat4 view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 	Terrain terrain(NULL, 32);
+	PerspectiveCamera camera(70.f, window.getSize().x / window.getSize().y, glm::vec3(4, 3, 3));
+
+	float dt = 0, sensitivity = 0.1, camera_speed = 10;
+	window.setMousePos(window.getSize() / glm::vec2(2));
 
 	glClearColor(0.f, 0.1f, 0.3f, 1.f);
 	while (window.closeButtonPressed() == false)
 	{
+		glfwSetTime(0);
+		glm::vec2 middle = window.getSize() / glm::vec2(2);
+		glm::vec2 delta_mouse_pos = window.getMousePos() - middle;
+		window.setMousePos(middle);
+
+		camera.lookVertically(delta_mouse_pos.y * sensitivity);
+		camera.lookHorizontally(delta_mouse_pos.x * sensitivity);
+		
+		camera.computeDirectionVectors();
+		if (window.isKeyPressed(GLFW_KEY_W))
+			camera.move(camera.getViewDirection() * camera_speed * dt);
+		if (window.isKeyPressed(GLFW_KEY_A))
+			camera.move(camera.getRight() * -camera_speed * dt);
+		if (window.isKeyPressed(GLFW_KEY_S))
+			camera.move(-camera.getViewDirection() * camera_speed * dt);
+		if (window.isKeyPressed(GLFW_KEY_D))
+			camera.move(camera.getRight() * camera_speed * dt);
+		if (window.isKeyPressed(GLFW_KEY_ESCAPE))
+			break;
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		mainShader->use();
-		mainShader->setUniformMatrix4("projection", projection);
-		mainShader->setUniformMatrix4("view", view);
+		mainShader->setUniformMatrix4("pv", camera.getViewProjectionTransform());
 		mainShader->setUniformMatrix4("model", glm::mat4(1.f));
 		myTexture->bind();
 		drawAThing();
 
 		window.update();
+		dt = glfwGetTime();
 	}
 
 	return 0;

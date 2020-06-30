@@ -8,7 +8,7 @@
 namespace toolbox
 {
 
-	std::string readFile(const char* src)
+	static std::string readFile(const char* src)
 	{
 		std::string content = "";
 		std::ifstream file;
@@ -28,6 +28,15 @@ namespace toolbox
 		file.close();
 
 		return content;
+	}
+
+	static float clampFloat(float val, float min, float max)
+	{
+		if (val > max)
+			return max;
+		if (val < min)
+			return min;
+		return val;
 	}
 
 }

@@ -10,7 +10,7 @@ public:
 	virtual void unbind() = 0;
 
 protected:
-	GLuint id = 0;
+	GLuint m_id = 0;
 };
 
 class Texture2D : public Texture

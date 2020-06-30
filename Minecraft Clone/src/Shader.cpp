@@ -4,12 +4,12 @@
 
 Shader::~Shader()
 {
-	glDeleteProgram(id);
+	glDeleteProgram(m_id);
 }
 
 void Shader::use()
 {
-	glUseProgram(id);
+	glUseProgram(m_id);
 }
 
 void Shader::init(const char* vertex_src, const char* fragment_src)
@@ -22,39 +22,39 @@ void Shader::init(const char* vertex_src, const char* fragment_src)
 	GLuint vertex = genShaderComponent(vertex_src, GL_VERTEX_SHADER);
 	GLuint fragment = genShaderComponent(fragment_src, GL_FRAGMENT_SHADER);
 
-	id = glCreateProgram();
-	glAttachShader(id, vertex);
-	glAttachShader(id, fragment);
-	glLinkProgram(id);
-	glDetachShader(id, vertex);
-	glDetachShader(id, fragment);
+	m_id = glCreateProgram();
+	glAttachShader(m_id, vertex);
+	glAttachShader(m_id, fragment);
+	glLinkProgram(m_id);
+	glDetachShader(m_id, vertex);
+	glDetachShader(m_id, fragment);
 	glDeleteShader(vertex);
 	glDeleteShader(fragment);
 }
 
 void Shader::setUniformMatrix4(const char* location, glm::mat4 matrix)
 {
-	glUniformMatrix4fv(glGetUniformLocation(id, location), 1, GL_FALSE, &matrix[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(m_id, location), 1, GL_FALSE, &matrix[0][0]);
 }
 
 void Shader::setUniformVector4(const char* location, glm::vec4 vector)
 {
-	glUniform4fv(glGetUniformLocation(id, location), 1, &vector[0]);
+	glUniform4fv(glGetUniformLocation(m_id, location), 1, &vector[0]);
 }
 
 void Shader::setUniformVector3(const char* location, glm::vec3 vector)
 {
-	glUniform3fv(glGetUniformLocation(id, location), 1, &vector[0]);
+	glUniform3fv(glGetUniformLocation(m_id, location), 1, &vector[0]);
 }
 
 void Shader::setUniformFloat(const char* location, float value)
 {
-	glUniform1f(glGetUniformLocation(id, location), value);
+	glUniform1f(glGetUniformLocation(m_id, location), value);
 }
 
 void Shader::setUniformInt(const char* location, int value)
 {
-	glUniform1i(glGetUniformLocation(id, location), value);
+	glUniform1i(glGetUniformLocation(m_id, location), value);
 }
 
 GLuint Shader::genShaderComponent(const char* src, GLenum type)
