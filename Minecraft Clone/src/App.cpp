@@ -58,8 +58,10 @@ int main()
 	chunk.build();
 	PerspectiveCamera camera(70.f, window.getSize().x / window.getSize().y, glm::vec3(0, 0, 0));
 
-	float dt = 0, sensitivity = 0.1, camera_speed = 10;
+	float dt = 0, sensitivity = 0.05, camera_speed = 10;
 	window.setMousePos(window.getSize() / glm::vec2(2));
+
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	glClearColor(0.f, 0.1f, 0.3f, 1.f);
 	while (window.closeButtonPressed() == false)
@@ -85,6 +87,9 @@ int main()
 			break;
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		std::string title = "X: " + std::to_string(camera.getPosition().x) + ", Y: " + std::to_string(camera.getPosition().y) + ", Z: " + std::to_string(camera.getPosition().z);
+		window.setTitle(title.c_str());
 
 		mainShader->use();
 		mainShader->setUniformMatrix4("pv", camera.getViewProjectionTransform());

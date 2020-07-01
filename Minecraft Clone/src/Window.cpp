@@ -57,6 +57,11 @@ void Window::setSize(unsigned int width, unsigned int height)
 	m_size.y = height;
 }
 
+void Window::setTitle(const char* title)
+{
+	glfwSetWindowTitle(m_window, title);
+}
+
 void Window::close()
 {
 	glfwSetWindowShouldClose(m_window, true);

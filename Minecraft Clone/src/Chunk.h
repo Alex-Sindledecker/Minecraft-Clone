@@ -5,14 +5,9 @@
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
-struct Triangle
-{
-	glm::vec4 v1, v2, v3;
-};
-
 struct Quad
 {
-	Triangle t1, t2;
+	GLuint vertices[6];
 };
 
 class Chunk
@@ -25,14 +20,13 @@ public:
 	void t_render();
 
 private:
-	Quad getTopFace( int x, int y, int z, int extra_bits);
-	Quad getBottomFace( int x, int y, int z, int extra_bits);
-	Quad getLeftFace(int x, int y, int z, int extra_bits);
-	Quad getRightFace(int x, int y, int z, int extra_bits);
-	Quad getFrontFace(int x, int y, int z, int extra_bits);
-	Quad getBackFace(int x, int y, int z, int extra_bits);
-
-	int fillExtraBlockBytes(const Block& block);
+	Quad getTopFace(unsigned int x, unsigned int y, unsigned int z, Block& block);
+	Quad getBottomFace(unsigned int x, unsigned int y, unsigned int z, Block& block);
+	Quad getLeftFace(unsigned int x, unsigned int y, unsigned int z, Block& block);
+	Quad getRightFace(unsigned int x, unsigned int y, unsigned int z, Block& block);
+	Quad getFrontFace(unsigned int x, unsigned int y, unsigned int z, Block& block);
+	Quad getBackFace(unsigned int x, unsigned int y, unsigned int z, Block& block);
+	unsigned int packData(unsigned int x, unsigned int y, unsigned int z, unsigned int normal, Block& block) const;
 
 	Terrain* m_terrain;
 	GLuint m_vao, m_vbo, m_tri_count;

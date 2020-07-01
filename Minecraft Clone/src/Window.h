@@ -16,6 +16,7 @@ public:
 	void setMousePos(float x, float y);
 	void setMousePos(glm::vec2 pos);
 	void setSize(unsigned int width, unsigned int height);
+	void setTitle(const char* title);
 	void close();
 	void update();
 
