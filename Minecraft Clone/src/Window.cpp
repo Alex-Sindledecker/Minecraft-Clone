@@ -86,4 +86,5 @@ void Window::init(const char* title)
 		CONSOLE_LOG_ERROR("Window.cpp", "Failed to initialized opengl");
 		glfwTerminate();
 	}
+	glEnable(GL_DEPTH_TEST);
 }

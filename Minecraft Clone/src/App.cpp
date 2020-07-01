@@ -51,9 +51,12 @@ int main()
 	glm::mat4 view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
 	Terrain terrain(NULL, 16);
+	Block block;
+	block.id = BLOCK_ID_GRASS;
+	terrain.setBlock(block, 10, 13, 10);
 	Chunk chunk(&terrain, glm::vec3(0, 0, 0));
 	chunk.build();
-	PerspectiveCamera camera(70.f, window.getSize().x / window.getSize().y, glm::vec3(4, 3, 3));
+	PerspectiveCamera camera(70.f, window.getSize().x / window.getSize().y, glm::vec3(0, 0, 0));
 
 	float dt = 0, sensitivity = 0.1, camera_speed = 10;
 	window.setMousePos(window.getSize() / glm::vec2(2));
@@ -81,13 +84,12 @@ int main()
 		if (window.isKeyPressed(GLFW_KEY_ESCAPE))
 			break;
 
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		mainShader->use();
 		mainShader->setUniformMatrix4("pv", camera.getViewProjectionTransform());
-		mainShader->setUniformMatrix4("model", glm::mat4(1.f));
 		myTexture->bind();
-		drawAThing();
+		chunk.t_render();
 
 		window.update();
 		dt = glfwGetTime();

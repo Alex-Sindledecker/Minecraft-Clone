@@ -1,15 +1,13 @@
 #version 330 core
 
-layout (location = 0) in vec2 pos;
-layout (location = 1) in vec2 uv;
+layout (location = 0) in vec4 pos;
 
 uniform mat4 pv;
-uniform mat4 model;
 
-out vec2 uv_coords;
+//out vec3 color;
 
 void main()
 {
-	gl_Position = pv * model * vec4(pos, 0, 1);
-	uv_coords = uv;
+	gl_Position = pv * vec4(pos.xyz, 1);
+	
 }

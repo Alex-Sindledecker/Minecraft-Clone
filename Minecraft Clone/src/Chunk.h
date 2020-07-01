@@ -5,15 +5,14 @@
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
+struct Triangle
+{
+	glm::vec4 v1, v2, v3;
+};
+
 struct Quad
 {
-	glm::vec4 top_right;
-	glm::vec4 top_left;
-	glm::vec4 bottom_left;
-	glm::vec4 bottom_left2;
-	glm::vec4 bottom_right;
-	glm::vec4 top_left2;
-	Quad() {}
+	Triangle t1, t2;
 };
 
 class Chunk
@@ -23,6 +22,7 @@ public:
 	~Chunk();
 
 	void build();
+	void t_render();
 
 private:
 	Quad getTopFace( int x, int y, int z, int extra_bits);
@@ -35,6 +35,6 @@ private:
 	int fillExtraBlockBytes(const Block& block);
 
 	Terrain* m_terrain;
-	GLuint m_vao, m_vbo;
+	GLuint m_vao, m_vbo, m_tri_count;
 	glm::vec3 m_pos;
 };
