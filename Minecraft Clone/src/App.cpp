@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "ResourceManager.h"
-#include "Terrain.h"
+#include "Chunk.h"
 #include "Window.h"
 #include "Camera.h"
 
@@ -50,7 +50,9 @@ int main()
 	glm::mat4 projection = glm::perspective(glm::radians(70.f), window.getSize().x / window.getSize().y, 0.1f, 100.f);
 	glm::mat4 view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 
-	Terrain terrain(NULL, 32);
+	Terrain terrain(NULL, 16);
+	Chunk chunk(&terrain, glm::vec3(0, 0, 0));
+	chunk.build();
 	PerspectiveCamera camera(70.f, window.getSize().x / window.getSize().y, glm::vec3(4, 3, 3));
 
 	float dt = 0, sensitivity = 0.1, camera_speed = 10;

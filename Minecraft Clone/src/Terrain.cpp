@@ -6,23 +6,27 @@
 Terrain::Terrain(int seed, int render_dist)
 {
 	setRenderDistance(render_dist);
-	update(glm::vec3(0, 0, 0));
 }
 
 Terrain::~Terrain()
 {
+	delete m_blocks;
 }
 
 void Terrain::setRenderDistance(unsigned int dist)
 {
 	m_render_dist = dist;
-	int totalBlocks = m_render_dist * m_render_dist * pow(CHUNK_SIZE, 4);
-	m_blocks.resize(totalBlocks);
+	const int total_blocks = m_render_dist * m_render_dist * pow(CHUNK_SIZE, 4);
+	m_blocks = new Block[total_blocks];
+	memset(m_blocks, BLOCK_STATE_VOID, total_blocks * sizeof(Block));
 }
 
 Block Terrain::getBlock(int x, int y, int z)
 {
-	return m_blocks[flattenIndex(x, y, z)];
+	int index = flattenIndex(x, y, z);
+	if (m_blocks[index].state == BLOCK_STATE_VOID)
+		m_blocks[index] = getNoiseBlock(x, y, z);
+	return m_blocks[index];
 }
 
 void Terrain::setBlock(Block block, int x, int y, int z)
@@ -30,25 +34,18 @@ void Terrain::setBlock(Block block, int x, int y, int z)
 	m_blocks[flattenIndex(x, y, z)] = block;
 }
 
-void Terrain::update(glm::vec3 pos)
-{
-	for (int y = 0; y < CHUNK_SIZE * CHUNK_SIZE; y++)
-	{
-		for (int x = 0; x < m_render_dist * CHUNK_SIZE; x++)
-		{
-			for (int z = 0; z < m_render_dist * CHUNK_SIZE; z++)
-			{
-				m_blocks[flattenIndex(x, y, z)] = getNoiseBlock(x, y, z);
-			}
-		}
-	}
-}
-
 int Terrain::flattenIndex(int x, int y, int z) const
 {
+	glm::vec3 local = globalToLocal(x, y, z);
 	int size = m_render_dist * CHUNK_SIZE;
 	int y_size = CHUNK_SIZE * CHUNK_SIZE;
-	return z * size * y_size + y * size + x;
+	return local.z * size * y_size + local.y * size + local.x;
+}
+
+glm::vec3 Terrain::globalToLocal(int x, int y, int z) const
+{
+	int half_size = m_render_dist * CHUNK_SIZE * 0.5;
+	return glm::vec3((x + half_size) % half_size * 2, (y + half_size) % half_size * 2, (z + half_size) % half_size * 2);
 }
 
 Block Terrain::getNoiseBlock(int x, int y, int z) const
