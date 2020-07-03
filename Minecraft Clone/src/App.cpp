@@ -23,7 +23,7 @@ int main()
 	Chunk chunks[32 * 32];
 	Block grass_block;
 	grass_block.id = BLOCK_ID_GRASS;
-	terrain.setBlock(grass_block, 0, 15, 0);
+	terrain.setBlock(grass_block, 0, 13, 0);
 	int index = 0;
 	for (int i = -16; i < 16; i++)
 	{
