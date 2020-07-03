@@ -177,18 +177,18 @@
     <ClCompile Include="src\Terrain.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\Transformable.cpp" />
+    <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="vendor\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="src\App.cpp" />
-    <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="vendor\stb_image.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
@@ -211,6 +211,7 @@
     <None Include="res\shaders\block_vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="res\tex\atlas.png" />
     <Image Include="res\tex\sample.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

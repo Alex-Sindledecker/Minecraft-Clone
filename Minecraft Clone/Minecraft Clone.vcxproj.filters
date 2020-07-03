@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="vendor\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,9 +30,6 @@
     <ClCompile Include="src\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vendor\stb_image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Terrain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -46,6 +40,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\stb_image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,9 +71,6 @@
     <ClInclude Include="src\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\stb_image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Terrain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -86,6 +83,9 @@
     <ClInclude Include="src\Chunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vendor\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\block_vertex.glsl" />
@@ -93,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\tex\sample.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\atlas.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

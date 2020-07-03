@@ -39,4 +39,13 @@ namespace toolbox
 		return val;
 	}
 
+	static float cycleClampFloat(float val, float min, float max)
+	{
+		if (val > max)
+			return min;
+		if (val < min)
+			return max;
+		return val;
+	}
+
 }

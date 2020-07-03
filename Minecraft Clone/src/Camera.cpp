@@ -40,7 +40,7 @@ void PerspectiveCamera::lookVertically(float d)
 
 void PerspectiveCamera::lookHorizontally(float d)
 {
-	m_pry.z = int(m_pry.z + d) % 360;
+	m_pry.z = toolbox::cycleClampFloat(m_pry.z + d, -360, 360);
 }
 
 void PerspectiveCamera::zoom(float dist)

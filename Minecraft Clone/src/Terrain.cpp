@@ -51,7 +51,7 @@ glm::vec3 Terrain::globalToLocal(int x, int y, int z) const
 Block Terrain::getNoiseBlock(int x, int y, int z) const
 {
 	Block block;
-	if (y < 10)
+	if (y < 13)
 	{
 		block.id = BLOCK_ID_GRASS;
 		block.state = BLOCK_STATE_NONE;
