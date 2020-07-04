@@ -1,8 +1,8 @@
 #include "pch.h"
+#include "chunk/Chunk.h"
+#include "game/Camera.h"
 #include "ResourceManager.h"
-#include "Chunk.h"
 #include "Window.h"
-#include "Camera.h"
 
 #include <thread>
 
@@ -18,12 +18,9 @@ int main()
 
 	glm::mat4 projection = glm::perspective(glm::radians(70.f), window.getSize().x / window.getSize().y, 0.1f, 100.f);
 	glm::mat4 view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-
-	Terrain terrain(NULL, 32);
+	Terrain terrain;
+	terrain.setBlock(TerrainGenerator::makeDefaultBlock(BlockType::GRASS), 0, 10, 0);
 	Chunk chunks[32 * 32];
-	Block grass_block;
-	grass_block.id = BLOCK_ID_GRASS;
-	terrain.setBlock(grass_block, 0, 13, 0);
 	int index = 0;
 	for (int i = -16; i < 16; i++)
 	{

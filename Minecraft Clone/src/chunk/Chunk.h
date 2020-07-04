@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Terrain.h"
+#include "terrain/Terrain.h"
 
 #include <glm/glm.hpp>
 #include <glad/glad.h>

@@ -3,8 +3,8 @@
 #include <unordered_map>
 #include <string>
 
-#include "Shader.h"
-#include "Texture.h"
+#include "gl/Shader.h"
+#include "gl/Texture.h"
 
 typedef std::shared_ptr<Shader> ShaderPtr;
 typedef std::shared_ptr<Texture> TexturePtr;

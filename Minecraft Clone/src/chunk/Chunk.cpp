@@ -2,6 +2,7 @@
 #include "Chunk.h"
 
 #define MIN_MESH_ALLOCATION 3072
+#define CHUNK_SIZE 16
 
 Chunk::Chunk(Terrain* terrain, glm::vec3 pos)
 	: m_terrain(terrain), m_pos(pos)
@@ -57,43 +58,44 @@ void Chunk::build()
 	std::vector<Quad> mesh(MIN_MESH_ALLOCATION);
 	unsigned int quadCount = 0;
 
-	for (unsigned int z = 0; z < CHUNK_SIZE; z++)
+	for (unsigned int local_z = 0; local_z < CHUNK_SIZE; local_z++)
 	{
-		for (unsigned int y = 0; y < CHUNK_SIZE; y++)
+		for (unsigned int local_y = 0; local_y < CHUNK_SIZE; local_y++)
 		{
-			for (unsigned int x = 0; x < CHUNK_SIZE; x++)
+			for (unsigned int local_x = 0; local_x < CHUNK_SIZE; local_x++)
 			{
-				Block block = m_terrain->getBlock(x + m_pos.x, y + m_pos.y, z + m_pos.z);
-				if (block.id != BLOCK_ID_AIR)
+				int x = local_x + m_pos.x, y = local_y + m_pos.y, z = local_z + m_pos.z;
+				Block block = m_terrain->getBlock(x, y, z);
+				if (block.id != BlockType::AIR)
 				{
-					if (m_terrain->getBlock(x + 1, y, z).id == BLOCK_ID_AIR)
+					if (m_terrain->getBlock(x + 1, y, z).id == BlockType::AIR)
 					{
-						mesh[quadCount] = getRightFace(x, y, z, block);
+						mesh[quadCount] = getRightFace(local_x, local_y, local_z, block);
 						quadCount++;
 					}
-					if (m_terrain->getBlock(x, y + 1, z).id == BLOCK_ID_AIR)
+					if (m_terrain->getBlock(x, y + 1, z).id == BlockType::AIR)
 					{
-						mesh[quadCount] = getTopFace(x, y, z, block);
+						mesh[quadCount] = getTopFace(local_x, local_y, local_z, block);
 						quadCount++;
 					}
-					if (m_terrain->getBlock(x, y, z + 1).id == BLOCK_ID_AIR)
+					if (m_terrain->getBlock(x, y, z + 1).id == BlockType::AIR)
 					{
-						mesh[quadCount] = getBackFace(x, y, z, block);
+						mesh[quadCount] = getBackFace(local_x, local_y, local_z, block);
 						quadCount++;
 					}
-					if (m_terrain->getBlock(x - 1, y, z).id == BLOCK_ID_AIR)
+					if (m_terrain->getBlock(x - 1, y, z).id == BlockType::AIR)
 					{
-						mesh[quadCount] = getLeftFace(x, y, z, block);
+						mesh[quadCount] = getLeftFace(local_x, local_y, local_z, block);
 						quadCount++;
 					}
-					if (m_terrain->getBlock(x, y - 1, z).id == BLOCK_ID_AIR)
+					if (m_terrain->getBlock(x, y - 1, z).id == BlockType::AIR)
 					{
- 						mesh[quadCount] = getBottomFace(x, y, z, block);
+ 						mesh[quadCount] = getBottomFace(local_x, local_y, local_z, block);
 						quadCount++;
 					}
-					if (m_terrain->getBlock(x, y, z - 1).id == BLOCK_ID_AIR)
+					if (m_terrain->getBlock(x, y, z - 1).id == BlockType::AIR)
 					{
-						mesh[quadCount] = getFrontFace(x, y, z, block);
+						mesh[quadCount] = getFrontFace(local_x, local_y, local_z, block);
 						quadCount++;
 					}
 				}
@@ -195,11 +197,11 @@ unsigned int Chunk::packData(unsigned int x, unsigned int y, unsigned int z, uns
 {
 	unsigned int uv_mod = 0;
 
-	if (block.id == BLOCK_ID_GRASS && normal == 0)
+	if (block.id == BlockType::GRASS && normal == 0)
 		uv_mod = 0;
-	else if (block.id == BLOCK_ID_GRASS && normal > 0 && normal <= 4)
+	else if (block.id == BlockType::GRASS && normal > 0 && normal <= 4)
 		uv_mod = 1;
-	if (block.id == BLOCK_ID_GRASS && normal == 5)
+	if (block.id == BlockType::GRASS && normal == 5)
 		uv_mod = 2;
 
 	return x | y << 6 | z << 12 | normal << 18 | uv << 21 | uv_mod << 23;

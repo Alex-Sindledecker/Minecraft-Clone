@@ -96,7 +96,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -114,7 +114,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -134,7 +134,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -156,7 +156,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -170,16 +170,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\Chunk.cpp" />
+    <ClCompile Include="src\game\Camera.cpp" />
+    <ClCompile Include="src\chunk\Chunk.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\Terrain.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
-    <ClCompile Include="src\Transformable.cpp" />
+    <ClCompile Include="src\gl\Shader.cpp" />
+    <ClCompile Include="src\terrain\Terrain.cpp" />
+    <ClCompile Include="src\gl\Texture.cpp" />
+    <ClCompile Include="src\game\Transformable.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\Window.cpp" />
-    <ClCompile Include="TerrainGenerator.cpp" />
+    <ClCompile Include="src\terrain\TerrainGenerator.cpp" />
     <ClCompile Include="vendor\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -194,18 +194,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\Chunk.h" />
+    <ClInclude Include="src\game\Camera.h" />
+    <ClInclude Include="src\chunk\Chunk.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\Terrain.h" />
-    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\gl\Shader.h" />
+    <ClInclude Include="src\terrain\Terrain.h" />
+    <ClInclude Include="src\gl\Texture.h" />
     <ClInclude Include="src\toolbox.h" />
     <ClInclude Include="src\Window.h" />
-    <ClInclude Include="src\Transformable.h" />
-    <ClInclude Include="TerrainGenerator.h" />
+    <ClInclude Include="src\game\Transformable.h" />
+    <ClInclude Include="src\terrain\TerrainGenerator.h" />
     <ClInclude Include="vendor\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
