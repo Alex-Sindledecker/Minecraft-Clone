@@ -21,13 +21,13 @@ int main()
 	Terrain terrain;
 	Chunk* chunks = new Chunk[32 * 32 * 16];
 	int index = 0;
-	for (int i = -16; i < 16; i++)
+	for (int i = 0; i < 16; i++)
 	{
 		for (int n = -16; n < 16; n++)
 		{
-			for (int k = 0; k < 16; k++)
+			for (int k = -16; k < 16; k++)
 			{
-				chunks[index].setPosition(glm::vec3(i * 16, k * 16, n * 16));
+				chunks[index].setPosition(glm::vec3(k * 16, i * 16, n * 16));
 				chunks[index].setTerrain(&terrain);
 				chunks[index].build();
 				index++;
@@ -68,7 +68,7 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		std::string title = "X: " + std::to_string(camera.getPosition().x) + ", Y: " + std::to_string(camera.getPosition().y) + ", Z: " + std::to_string(camera.getPosition().z);
-		window.setTitle(title.c_str());
+		window.setTitle((title + ", FPS: " + std::to_string(1 / dt)).c_str());
 
 		mainShader->use();
 		mainShader->setUniformMatrix4("pv", camera.getViewProjectionTransform());

@@ -13,7 +13,7 @@ TerrainGenerator::~TerrainGenerator()
 
 int TerrainGenerator::getHeight2D(float x, float z) const
 {
-	return abs(floor(m_noise_generator.GetPerlin(x, z) * max_height));
+	return abs(m_noise_generator.GetPerlin(x, z) * max_height);
 }
 
 float TerrainGenerator::getHeight3D(float x, float y, float z) const

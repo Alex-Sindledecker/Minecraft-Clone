@@ -17,9 +17,9 @@ vec2 uvs[4] = vec2[4](
 
 void main()
 {
-	float x = (vertex & 0x3F000u) >> 12u;
+	float z = (vertex & 0x3F000u) >> 12u;
 	float y = (vertex & 0xFC0u) >> 6u;
-	float z = vertex & 0x03Fu;
+	float x = vertex & 0x03Fu;
 	gl_Position = pv * vec4(x + chunk_pos.x, y + chunk_pos.y, z + chunk_pos.z, 1);
 	
 	normal = (vertex & 0x1C0000u) >> 18u;
