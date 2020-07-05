@@ -180,6 +180,12 @@
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\terrain\TerrainGenerator.cpp" />
+    <ClCompile Include="vendor\FastNoise\FastNoise.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="vendor\glad.c">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -206,6 +212,7 @@
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\game\Transformable.h" />
     <ClInclude Include="src\terrain\TerrainGenerator.h" />
+    <ClInclude Include="vendor\FastNoise\FastNoise.h" />
     <ClInclude Include="vendor\stb_image.h" />
   </ItemGroup>
   <ItemGroup>

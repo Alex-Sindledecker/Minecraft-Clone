@@ -103,13 +103,14 @@ void Chunk::build()
 		}
 	}
 
-	mesh.resize(quadCount);
-	mesh.shrink_to_fit();
-	m_tri_count = mesh.size() * 2 * 6;
+	if (quadCount > 0)
+	{
+		m_tri_count = mesh.size() * 2 * 6;
 
-	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	glBufferData(GL_ARRAY_BUFFER, mesh.size() * sizeof(Quad), &mesh[0], GL_DYNAMIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
+		glBufferData(GL_ARRAY_BUFFER, quadCount * sizeof(Quad), &mesh[0], GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+	}
 }
 
 void Chunk::t_render()
@@ -191,8 +192,6 @@ Quad Chunk::getBackFace(unsigned int x, unsigned int y, unsigned int z, Block& b
 	return face;
 }
 
-#include <random>
-
 unsigned int Chunk::packData(unsigned int x, unsigned int y, unsigned int z, unsigned int normal, unsigned int uv, Block& block) const
 {
 	unsigned int uv_mod = 0;
@@ -201,7 +200,7 @@ unsigned int Chunk::packData(unsigned int x, unsigned int y, unsigned int z, uns
 		uv_mod = 0;
 	else if (block.id == BlockType::GRASS && normal > 0 && normal <= 4)
 		uv_mod = 1;
-	if (block.id == BlockType::GRASS && normal == 5)
+	if ((block.id == BlockType::GRASS && normal == 5) || block.id == BlockType::DIRT)
 		uv_mod = 2;
 
 	return x | y << 6 | z << 12 | normal << 18 | uv << 21 | uv_mod << 23;

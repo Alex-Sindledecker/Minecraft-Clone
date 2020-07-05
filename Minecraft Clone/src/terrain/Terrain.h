@@ -12,7 +12,7 @@ public:
 	}
 
 private:
-	static const long long int map_range = INT_MAX;
+	static const int map_range = INT_MAX;
 };
 
 class Terrain
@@ -27,5 +27,6 @@ public:
 	void setBlock(Block block, glm::vec3 pos);
 
 private:
+	TerrainGenerator generator;
 	std::unordered_map<glm::vec3, Block, PositionHasher> m_modified_blocks;
 };
