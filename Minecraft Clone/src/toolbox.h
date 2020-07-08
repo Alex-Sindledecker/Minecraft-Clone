@@ -2,11 +2,13 @@
 
 #include <string>
 #include <fstream>
+#include <chrono>
 
 #include "Logger.h"
 
 namespace toolbox
 {
+	typedef std::chrono::time_point<std::chrono::steady_clock> TimePoint;
 
 	static std::string readFile(const char* src)
 	{
@@ -46,6 +48,16 @@ namespace toolbox
 		if (val < min)
 			return max;
 		return val;
+	} 
+
+	static TimePoint getCurrentTime()
+	{
+		return std::chrono::high_resolution_clock::now();
+	}
+
+	static double getElapsedTime(TimePoint start, TimePoint end)
+	{
+		return std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / (double)1000000000;
 	}
 
 }

@@ -10,7 +10,8 @@ enum class BlockType : byte
 	AIR = 0,
 	GRASS,
 	DIRT,
-	STONE
+	STONE,
+	BEDROCK
 };
 
 enum class BlockState : byte
@@ -29,14 +30,13 @@ struct Block
 class TerrainGenerator
 {
 public:
-	TerrainGenerator(const int seed, unsigned int max_height);
+	TerrainGenerator(const int seed);
 	~TerrainGenerator();
 
-	int getHeight2D(float x, float z) const;
+	float getHeight2D(float x, float z) const;
 	float getHeight3D(float x, float y, float z) const;
 
 private:
 	FastNoise m_noise_generator;
-	unsigned int max_height;
 };
 

@@ -1,9 +1,6 @@
 #include "pch.h"
 #include "Chunk.h"
 
-#define MIN_MESH_ALLOCATION 3072
-#define CHUNK_SIZE 16
-
 Chunk::Chunk(Terrain* terrain, glm::vec3 pos)
 	: m_terrain(terrain), m_pos(pos)
 {
@@ -55,60 +52,14 @@ glm::vec3 Chunk::getPosition() const
 
 void Chunk::build()
 {
-	std::vector<Quad> mesh(MIN_MESH_ALLOCATION);
-	unsigned int quadCount = 0;
+	ChunkMesh mesh = ChunkBuilder::buildMesh(m_terrain, m_pos);
 
-	for (unsigned int local_z = 0; local_z < CHUNK_SIZE; local_z++)
+	if (mesh.num_quads > 0)
 	{
-		for (unsigned int local_y = 0; local_y < CHUNK_SIZE; local_y++)
-		{
-			for (unsigned int local_x = 0; local_x < CHUNK_SIZE; local_x++)
-			{
-				int x = local_x + m_pos.x, y = local_y + m_pos.y, z = local_z + m_pos.z;
-				Block block = m_terrain->getBlock(x, y, z);
-				if (block.id != BlockType::AIR)
-				{
-					if (m_terrain->getBlock(x + 1, y, z).id == BlockType::AIR)
-					{
-						mesh[quadCount] = getRightFace(local_x, local_y, local_z, block);
-						quadCount++;
-					}
-					if (m_terrain->getBlock(x, y + 1, z).id == BlockType::AIR)
-					{
-						mesh[quadCount] = getTopFace(local_x, local_y, local_z, block);
-						quadCount++;
-					}
-					if (m_terrain->getBlock(x, y, z + 1).id == BlockType::AIR)
-					{
-						mesh[quadCount] = getBackFace(local_x, local_y, local_z, block);
-						quadCount++;
-					}
-					if (m_terrain->getBlock(x - 1, y, z).id == BlockType::AIR)
-					{
-						mesh[quadCount] = getLeftFace(local_x, local_y, local_z, block);
-						quadCount++;
-					}
-					if (m_terrain->getBlock(x, y - 1, z).id == BlockType::AIR)
-					{
- 						mesh[quadCount] = getBottomFace(local_x, local_y, local_z, block);
-						quadCount++;
-					}
-					if (m_terrain->getBlock(x, y, z - 1).id == BlockType::AIR)
-					{
-						mesh[quadCount] = getFrontFace(local_x, local_y, local_z, block);
-						quadCount++;
-					}
-				}
-			}
-		}
-	}
-
-	if (quadCount > 0)
-	{
-		m_tri_count = mesh.size() * 2 * 6;
+		m_tri_count = mesh.num_quads * 2 * 6;
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-		glBufferData(GL_ARRAY_BUFFER, quadCount * sizeof(Quad), &mesh[0], GL_DYNAMIC_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, mesh.num_quads * sizeof(Quad), &mesh.mesh.get()[0], GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 }
@@ -118,90 +69,4 @@ void Chunk::t_render()
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_TRIANGLES, 0, m_tri_count);
 	glBindVertexArray(0);
-}
-
-Quad Chunk::getTopFace(unsigned int x, unsigned int y, unsigned int z, Block& block)
-{
-	Quad face;
-	face.vertices[0] = packData(x + 1, y + 1, z + 1, 0, 0, block);
-	face.vertices[1] = packData(x, y + 1, z + 1, 0, 1, block);
-	face.vertices[2] = packData(x, y + 1, z, 0, 2, block);
-	face.vertices[3] = face.vertices[2];
-	face.vertices[4] = packData(x + 1, y + 1, z, 0, 3, block);
-	face.vertices[5] = face.vertices[0];
-	return face;	
-}
-
-Quad Chunk::getBottomFace(unsigned int x, unsigned int y, unsigned int z, Block& block)
-{
-	Quad face;
-	face.vertices[0] = packData(x + 1, y, z + 1, 5, 0, block);
-	face.vertices[1] = packData(x, y, z + 1, 5, 1, block);
-	face.vertices[2] = packData(x, y, z, 5, 2, block);
-	face.vertices[3] = face.vertices[2];
-	face.vertices[4] = packData(x + 1, y, z, 5, 3, block);
-	face.vertices[5] = face.vertices[0];
-	return face;
-}
-
-Quad Chunk::getLeftFace(unsigned int x, unsigned int y, unsigned int z, Block& block)
-{
-	Quad face;
-	face.vertices[0] = packData(x, y + 1, z, 2, 0, block);
-	face.vertices[1] = packData(x, y + 1, z + 1, 2, 1, block);
-	face.vertices[2] = packData(x, y, z + 1, 2, 2, block);
-	face.vertices[3] = face.vertices[2];
-	face.vertices[4] = packData(x, y, z, 2, 3, block);
-	face.vertices[5] = face.vertices[0];
-	return face;
-}
-
-Quad Chunk::getRightFace(unsigned int x, unsigned int y, unsigned int z, Block& block)
-{
-	Quad face;
-	face.vertices[0] = packData(x + 1, y + 1, z, 4, 0, block);
-	face.vertices[1] = packData(x + 1, y + 1, z + 1, 4, 1, block);
-	face.vertices[2] = packData(x + 1, y, z + 1, 4, 2, block);
-	face.vertices[3] = face.vertices[2];
-	face.vertices[4] = packData(x + 1, y, z, 4, 3, block);
-	face.vertices[5] = face.vertices[0];
-	return face;
-}
-
-Quad Chunk::getFrontFace(unsigned int x, unsigned int y, unsigned int z, Block& block)
-{
-	Quad face;
-	face.vertices[0] = packData(x + 1, y + 1, z, 1, 0, block);
-	face.vertices[1] = packData(x, y + 1, z, 1, 1, block);
-	face.vertices[2] = packData(x, y, z, 1, 2, block);
-	face.vertices[3] = face.vertices[2];
-	face.vertices[4] = packData(x + 1, y, z, 1, 3, block);
-	face.vertices[5] = face.vertices[0];
-	return face;
-}
-
-Quad Chunk::getBackFace(unsigned int x, unsigned int y, unsigned int z, Block& block)
-{
-	Quad face;
-	face.vertices[0] = packData(x + 1, y + 1, z + 1, 3, 0, block);
-	face.vertices[1] = packData(x, y + 1, z + 1, 3, 1, block);
-	face.vertices[2] = packData(x, y, z + 1, 3, 2, block);
-	face.vertices[3] = face.vertices[2];
-	face.vertices[4] = packData(x + 1, y, z + 1, 3, 3, block);
-	face.vertices[5] = face.vertices[0];
-	return face;
-}
-
-unsigned int Chunk::packData(unsigned int x, unsigned int y, unsigned int z, unsigned int normal, unsigned int uv, Block& block) const
-{
-	unsigned int uv_mod = 0;
-
-	if (block.id == BlockType::GRASS && normal == 0)
-		uv_mod = 0;
-	else if (block.id == BlockType::GRASS && normal > 0 && normal <= 4)
-		uv_mod = 1;
-	if ((block.id == BlockType::GRASS && normal == 5) || block.id == BlockType::DIRT)
-		uv_mod = 2;
-
-	return x | y << 6 | z << 12 | normal << 18 | uv << 21 | uv_mod << 23;
 }

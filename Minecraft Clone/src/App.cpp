@@ -2,6 +2,7 @@
 #include "chunk/Chunk.h"
 #include "game/Camera.h"
 #include "ResourceManager.h"
+#include "toolbox.h"
 #include "Window.h"
 
 #include <thread>
@@ -19,6 +20,7 @@ int main()
 	glm::mat4 projection = glm::perspective(glm::radians(70.f), window.getSize().x / window.getSize().y, 0.1f, 100.f);
 	glm::mat4 view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 	Terrain terrain;
+
 	Chunk* chunks = new Chunk[32 * 32 * 16];
 	int index = 0;
 	for (int i = 0; i < 16; i++)
@@ -34,6 +36,7 @@ int main()
 			}
 		}
 	}
+
 	PerspectiveCamera camera(70.f, window.getSize().x / window.getSize().y, glm::vec3(16, 3, -11));
 	camera.setViewRange(0.1, 32 * 16);
 

@@ -3,6 +3,8 @@
 #include "TerrainGenerator.h"
 #include <unordered_map>
 
+#define CHUNK_SIZE 16
+
 class PositionHasher
 {
 public:
