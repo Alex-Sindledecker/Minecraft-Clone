@@ -1,5 +1,4 @@
 #include "pch.h"
-#include "chunk/Chunk.h"
 #include "game/Camera.h"
 #include "ResourceManager.h"
 #include "toolbox.h"
@@ -19,24 +18,7 @@ int main()
 
 	glm::mat4 projection = glm::perspective(glm::radians(70.f), window.getSize().x / window.getSize().y, 0.1f, 100.f);
 	glm::mat4 view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-	Terrain terrain;
-
-	Chunk* chunks = new Chunk[32 * 32 * 16];
-	int index = 0;
-	for (int i = 0; i < 16; i++)
-	{
-		for (int n = -16; n < 16; n++)
-		{
-			for (int k = -16; k < 16; k++)
-			{
-				chunks[index].setPosition(glm::vec3(k * 16, i * 16, n * 16));
-				chunks[index].setTerrain(&terrain);
-				chunks[index].build();
-				index++;
-			}
-		}
-	}
-
+	
 	PerspectiveCamera camera(70.f, window.getSize().x / window.getSize().y, glm::vec3(16, 3, -11));
 	camera.setViewRange(0.1, 32 * 16);
 
@@ -76,12 +58,6 @@ int main()
 		mainShader->use();
 		mainShader->setUniformMatrix4("pv", camera.getViewProjectionTransform());
 		myTexture->bind();
-		index = 0;
-		for (int i = 0; i < 32 * 32 * 16; i++)
-		{
-			mainShader->setUniformVector3("chunk_pos", chunks[i].getPosition());
-			chunks[i].t_render();
-		}
 
 		window.update();
 		dt = glfwGetTime();

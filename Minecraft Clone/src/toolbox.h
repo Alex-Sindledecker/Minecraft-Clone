@@ -10,54 +10,16 @@ namespace toolbox
 {
 	typedef std::chrono::time_point<std::chrono::steady_clock> TimePoint;
 
-	static std::string readFile(const char* src)
-	{
-		std::string content = "";
-		std::ifstream file;
-		file.open(src);
-		if (file.is_open())
-		{
-			std::string line;
-			while (std::getline(file, line))
-			{
-				content += line + '\n';
-			}
-		}
-		else
-		{
-			CONSOLE_LOG_ERROR("toolbox.h", "Failed to open file " << src);
-		}
-		file.close();
+	std::string readFile(const char* src);
 
-		return content;
-	}
+	float clampFloat(float val, float min, float max);
 
-	static float clampFloat(float val, float min, float max)
-	{
-		if (val > max)
-			return max;
-		if (val < min)
-			return min;
-		return val;
-	}
+	float cycleClampFloat(float val, float min, float max);
 
-	static float cycleClampFloat(float val, float min, float max)
-	{
-		if (val > max)
-			return min;
-		if (val < min)
-			return max;
-		return val;
-	} 
+	int flatten3DIndex(int x, int y, int z, int w, int h);
 
-	static TimePoint getCurrentTime()
-	{
-		return std::chrono::high_resolution_clock::now();
-	}
+	TimePoint getCurrentTime();
 
-	static double getElapsedTime(TimePoint start, TimePoint end)
-	{
-		return std::chrono::duration_cast<std::chrono::nanoseconds>(end - start).count() / (double)1000000000;
-	}
+	double getElapsedTime(TimePoint start, TimePoint end);
 
 }
