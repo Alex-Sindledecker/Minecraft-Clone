@@ -7,6 +7,7 @@
 
 	#define CONSOLE_LOG_ERROR(src, msg) std::cout << "ERROR(" << src << "): " << msg << "!" << std::endl
 	#define CONSOLE_LOG_WARNING(src, msg) std::cout << "WARNING(" << src << "): " << msg << "!" << std::endl
+	#define CONSOLE_LOG_MESSAGE(msg) std::cout << msg << std::endl
 	#define FILE_LOG_ERROR(src, msg) __file_log__("ERROR", src, msg)
 	#define FILE_LOG_WARNING(src, msg) __file_log__("WARNING", src, msg)
 
@@ -25,6 +26,7 @@
 
 	#define CONSOLE_LOG_ERROR(src, msg)
 	#define CONSOLE_LOG_WARNING(src, msg)
+	#define CONSOLE_LOG_MESSAGE(msg)
 	#define FILE_LOG_ERROR(src, msg)
 	#define FILE_LOG_WARNING(src, msg)
 

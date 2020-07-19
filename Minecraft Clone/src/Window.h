@@ -6,9 +6,11 @@
 class Window
 {
 public:
-	Window(unsigned int width, unsigned int height, const char* title);
+	Window() {}
+	Window(unsigned int width, unsigned int height, const char* title, bool fullscreen = false);
 	~Window();
 
+	void create(unsigned int width, unsigned int height, const char* title, bool fullscreen = false);
 	bool closeButtonPressed();
 	bool isKeyPressed(int key);
 	glm::vec2 getSize() const;
@@ -21,7 +23,7 @@ public:
 	void update();
 
 private:
-	void init(const char* title);
+	void init(const char* title, bool fullscreen);
 
 	GLFWwindow* m_window;
 	glm::vec2 m_size;

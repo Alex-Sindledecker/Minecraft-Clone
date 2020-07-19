@@ -45,7 +45,16 @@
     <ClCompile Include="vendor\FastNoise\FastNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\toolbox.cpp">
+    <ClCompile Include="src\gl\VertexBuffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gl\VertexArray.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vendor\pugixml\src\pugixml.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,9 +69,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\ResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\toolbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="vendor\stb_image.h">
@@ -83,10 +89,30 @@
     <ClInclude Include="vendor\FastNoise\FastNoise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\gl\VertexBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gl\VertexArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\toolbox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\pugixml\src\pugiconfig.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vendor\pugixml\src\pugixml.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\block_vertex.glsl" />
     <None Include="res\shaders\block_fragment.glsl" />
+    <None Include="res\shaders\vertex.glsl" />
+    <None Include="res\shaders\fragment.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\tex\sample.png">
@@ -95,5 +121,8 @@
     <Image Include="res\tex\atlas.png">
       <Filter>Resource Files</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\Settings.xml" />
   </ItemGroup>
 </Project>

@@ -4,3 +4,6 @@
 [submodule "Minecraft Clone/vendor/FastNoise"]
 	path = Minecraft Clone/vendor/FastNoise
 	url = https://github.com/Auburns/FastNoise
+[submodule "Minecraft Clone/vendor/pugixml"]
+	path = Minecraft Clone/vendor/pugixml
+	url = https://github.com/zeux/pugixml

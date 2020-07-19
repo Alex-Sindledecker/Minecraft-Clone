@@ -96,7 +96,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\owner\Desktop\Minecraft-Clone\Minecraft Clone\vendor\pugixml\src;$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -114,7 +114,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\owner\Desktop\Minecraft-Clone\Minecraft Clone\vendor\pugixml\src;$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -134,7 +134,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\owner\Desktop\Minecraft-Clone\Minecraft Clone\vendor\pugixml\src;$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -156,7 +156,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\owner\Desktop\Minecraft-Clone\Minecraft Clone\vendor\pugixml\src;$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -171,17 +171,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\game\Camera.cpp" />
+    <ClCompile Include="src\game\Game.cpp" />
+    <ClCompile Include="src\gl\VertexArray.cpp" />
+    <ClCompile Include="src\gl\VertexBuffer.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\gl\Shader.cpp" />
     <ClCompile Include="src\gl\Texture.cpp" />
     <ClCompile Include="src\game\Transformable.cpp" />
     <ClCompile Include="src\App.cpp" />
-    <ClCompile Include="src\toolbox.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
-    </ClCompile>
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="vendor\FastNoise\FastNoise.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
@@ -190,6 +187,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="vendor\glad.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="vendor\pugixml\src\pugixml.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -204,6 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\game\Camera.h" />
+    <ClInclude Include="src\game\Game.h" />
+    <ClInclude Include="src\gl\VertexArray.h" />
+    <ClInclude Include="src\gl\VertexBuffer.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\pch.h" />
@@ -213,15 +219,22 @@
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\game\Transformable.h" />
     <ClInclude Include="vendor\FastNoise\FastNoise.h" />
+    <ClInclude Include="vendor\pugixml\src\pugiconfig.hpp" />
+    <ClInclude Include="vendor\pugixml\src\pugixml.hpp" />
     <ClInclude Include="vendor\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\block_fragment.glsl" />
     <None Include="res\shaders\block_vertex.glsl" />
+    <None Include="res\shaders\fragment.glsl" />
+    <None Include="res\shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\tex\atlas.png" />
     <Image Include="res\tex\sample.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="res\Settings.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
