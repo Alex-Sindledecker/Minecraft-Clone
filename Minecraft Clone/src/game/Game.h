@@ -1,5 +1,6 @@
 #pragma once
 
+#include "layers/Layer.h"
 #include "Camera.h"
 #include "ResourceManager.h"
 #include "Window.h"
@@ -30,14 +31,20 @@ public:
 	Window* getWindow();
 	void init();
 	void run();
+	void pushLayer(Layer* layer);
+	Layer* popLayer();
+	const GraphicsSettings& getGraphicsSettings() const;
+	const GameSettings& getGameSettings() const;
 
 private:
 	void loadSettings(const char* xml_path);
 	void saveSettings(const char* xml_path);
 
+	Window m_window;
+	std::vector<Layer*> m_layer_stack;
+
 	GameSettings m_game_settings;
 	GraphicsSettings m_graphics_settings;
-	Window m_window;
 	pugi::xml_document m_doc;
 	const char* m_settings_path;
 	bool m_settings_changed = false;
