@@ -172,9 +172,11 @@
   <ItemGroup>
     <ClCompile Include="src\game\Camera.cpp" />
     <ClCompile Include="src\game\Game.cpp" />
+    <ClCompile Include="src\game\Settings.cpp" />
     <ClCompile Include="src\gl\VertexArray.cpp" />
     <ClCompile Include="src\gl\VertexBuffer.cpp" />
     <ClCompile Include="src\layers\Layer.cpp" />
+    <ClCompile Include="src\layers\SkyboxLayer.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\gl\Shader.cpp" />
     <ClCompile Include="src\gl\Texture.cpp" />
@@ -209,9 +211,11 @@
   <ItemGroup>
     <ClInclude Include="src\game\Camera.h" />
     <ClInclude Include="src\game\Game.h" />
+    <ClInclude Include="src\game\Settings.h" />
     <ClInclude Include="src\layers\Layer.h" />
     <ClInclude Include="src\gl\VertexArray.h" />
     <ClInclude Include="src\gl\VertexBuffer.h" />
+    <ClInclude Include="src\layers\SkyboxLayer.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\pch.h" />
@@ -229,11 +233,19 @@
     <None Include="res\shaders\block_fragment.glsl" />
     <None Include="res\shaders\block_vertex.glsl" />
     <None Include="res\shaders\fragment.glsl" />
+    <None Include="res\shaders\skybox_fragment.glsl" />
+    <None Include="res\shaders\skybox_vertex.glsl" />
     <None Include="res\shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\tex\atlas.png" />
     <Image Include="res\tex\sample.png" />
+    <Image Include="res\tex\skyboxes\skybox\back.jpg" />
+    <Image Include="res\tex\skyboxes\skybox\bottom.jpg" />
+    <Image Include="res\tex\skyboxes\skybox\front.jpg" />
+    <Image Include="res\tex\skyboxes\skybox\left.jpg" />
+    <Image Include="res\tex\skyboxes\skybox\right.jpg" />
+    <Image Include="res\tex\skyboxes\skybox\top.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="res\Settings.xml" />

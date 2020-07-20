@@ -4,15 +4,14 @@
 Game::Game(const char* settings_xml_path)
 {
 	m_settings_path = settings_xml_path;
-	loadSettings(settings_xml_path);
+	m_doc = Settings::load("res/Settings.xml");
 
-	m_window.create(m_graphics_settings.window_width, m_graphics_settings.window_height, "Minecraft Clone", m_graphics_settings.fullscreen);
+	m_window.create(Settings::window_width, Settings::window_height, "Minecraft Clone", Settings::fullscreen);
 }
 
 Game::~Game()
 {
-	if (m_settings_changed)
-		saveSettings(m_settings_path);
+	Settings::save(m_doc, m_settings_path);
 }
 
 Window* Game::getWindow()
@@ -22,10 +21,10 @@ Window* Game::getWindow()
 
 void Game::init()
 {
-	for (Layer* layer : m_layer_stack)
+	for (int i = m_layer_stack.size() - 1; i >= 0; i--)
 	{
-		layer->setWindow(&m_window);
-		layer->onCreate();
+		m_layer_stack[i]->setWindow(&m_window);
+		m_layer_stack[i]->onCreate();
 	}
 }
 
@@ -64,39 +63,4 @@ Layer* Game::popLayer()
 	m_layer_stack.pop_back();
 
 	return result;
-}
-
-const GraphicsSettings& Game::getGraphicsSettings() const
-{
-	return m_graphics_settings;
-}
-
-const GameSettings& Game::getGameSettings() const
-{
-	return m_game_settings;
-}
-
-void Game::loadSettings(const char* xml_path)
-{
-	pugi::xml_parse_result result = m_doc.load_file(xml_path);
-	if (!result)
-	{
-		CONSOLE_LOG_ERROR("Game.cpp", result.description());
-		return;
-	}
-
-	pugi::xml_node root = m_doc.child("Settings");
-	pugi::xml_node gameplay = root.child("GameplaySettings");
-	pugi::xml_node graphics = root.child("GraphicsSettings");
-
-	m_game_settings.render_distance = graphics.child("RenderDistance").attribute("value").as_int();
-
-	m_graphics_settings.window_width = graphics.child("WindowSize").attribute("width").as_int();
-	m_graphics_settings.window_height = graphics.child("WindowSize").attribute("height").as_int();
-	m_graphics_settings.fullscreen = graphics.child("WindowSize").attribute("fullscreen").as_bool();
-}
-
-void Game::saveSettings(const char* xml_path)
-{
-	m_doc.save_file(xml_path);
 }

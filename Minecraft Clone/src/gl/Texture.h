@@ -24,12 +24,23 @@ public:
 	void init(const char* src);
 };
 
+struct CubemapTextures
+{
+	const char* top;
+	const char* bottom;
+	const char* left;
+	const char* right;
+	const char* front;
+	const char* back;
+};
+
 class Texture3D : public Texture
 {
 public:
 	Texture3D();
 	~Texture3D();
 
-	void bind() override {}
-	void unbind() override {}
+	void bind() override;
+	void unbind() override;
+	void init(const CubemapTextures& textures);
 };

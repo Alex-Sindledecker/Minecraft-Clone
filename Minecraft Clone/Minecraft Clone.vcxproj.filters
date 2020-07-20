@@ -60,6 +60,12 @@
     <ClCompile Include="src\layers\Layer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\layers\SkyboxLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\Settings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\pch.h">
@@ -113,18 +119,44 @@
     <ClInclude Include="src\layers\Layer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\game\Settings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\layers\SkyboxLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\block_vertex.glsl" />
     <None Include="res\shaders\block_fragment.glsl" />
     <None Include="res\shaders\vertex.glsl" />
     <None Include="res\shaders\fragment.glsl" />
+    <None Include="res\shaders\skybox_vertex.glsl" />
+    <None Include="res\shaders\skybox_fragment.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\tex\sample.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\tex\atlas.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\skybox\top.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\skybox\right.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\skybox\left.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\skybox\front.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\skybox\bottom.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\skybox\back.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

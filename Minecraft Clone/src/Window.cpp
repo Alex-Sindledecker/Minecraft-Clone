@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 #include "Window.h"
+#include "game/Settings.h"
 
 Window::Window(unsigned int width, unsigned int height, const char* title, bool fullscreen)
 {

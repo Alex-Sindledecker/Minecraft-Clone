@@ -77,6 +77,16 @@ glm::mat4 PerspectiveCamera::getViewProjectionTransform()
 	return projection * view;
 }
 
+glm::mat4 PerspectiveCamera::getViewMatrix()
+{
+	return glm::lookAt(m_pos, m_pos + m_view_dir, m_up);
+}
+
+glm::mat4 PerspectiveCamera::getProjectionMatrix()
+{
+	return glm::perspective(glm::radians(m_fov), m_aspect_ratio, m_near, m_far);
+}
+
 glm::vec3 PerspectiveCamera::getViewDirection() const
 {
 	return m_view_dir;

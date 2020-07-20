@@ -16,6 +16,8 @@ public:
 	void setViewRange(float near_plane, float far_plane);
 	void computeDirectionVectors();
 	glm::mat4 getViewProjectionTransform();
+	glm::mat4 getViewMatrix();
+	glm::mat4 getProjectionMatrix();
 	glm::vec3 getViewDirection() const;
 	glm::vec3 getRight() const;
 
