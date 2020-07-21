@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <Settings>
-	<GameplaySettings>
-		<RenderDistance value="32" />
-	</GameplaySettings>
-	<GraphicsSettings>
-		<GLVersion major="3" minor="3" />
-		<WindowSize width="1920" height="1080" fullscreen="true" />
-		<Antiailising enabled="true" level="4" />
-		<AnisotropicFiltering enabled="false" level="0" />
-	</GraphicsSettings>
+  <GameplaySettings>
+    <RenderDistance value="32" />
+  </GameplaySettings>
+  <GraphicsSettings>
+    <GLVersion major="3" minor="3" />
+    <WindowSize width="1920" height="1080" fullscreen="true" />
+    <Antiailising enabled="true" level="4" />
+    <AnisotropicFiltering enabled="false" level="0" />
+  </GraphicsSettings>
 </Settings>

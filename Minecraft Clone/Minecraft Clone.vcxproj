@@ -177,6 +177,7 @@
     <ClCompile Include="src\gl\VertexBuffer.cpp" />
     <ClCompile Include="src\layers\Layer.cpp" />
     <ClCompile Include="src\layers\SkyboxLayer.cpp" />
+    <ClCompile Include="src\layers\WaterLayer.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\gl\Shader.cpp" />
     <ClCompile Include="src\gl\Texture.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="src\gl\VertexArray.h" />
     <ClInclude Include="src\gl\VertexBuffer.h" />
     <ClInclude Include="src\layers\SkyboxLayer.h" />
+    <ClInclude Include="src\layers\WaterLayer.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\Logger.h" />
     <ClInclude Include="src\pch.h" />
