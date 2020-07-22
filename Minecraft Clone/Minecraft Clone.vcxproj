@@ -232,14 +232,17 @@
   <ItemGroup>
     <None Include="res\shaders\block_fragment.glsl" />
     <None Include="res\shaders\block_vertex.glsl" />
-    <None Include="res\shaders\fragment.glsl" />
+    <None Include="res\shaders\quad_fragment.glsl" />
     <None Include="res\shaders\skybox_fragment.glsl" />
     <None Include="res\shaders\skybox_vertex.glsl" />
-    <None Include="res\shaders\vertex.glsl" />
+    <None Include="res\shaders\quad_vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\tex\atlas.png" />
     <Image Include="res\tex\sample.png" />
+    <Image Include="res\tex\skyboxes\my_skybox\Bottom.png" />
+    <Image Include="res\tex\skyboxes\my_skybox\Side.png" />
+    <Image Include="res\tex\skyboxes\my_skybox\Top.png" />
     <Image Include="res\tex\skyboxes\skybox\back.jpg" />
     <Image Include="res\tex\skyboxes\skybox\bottom.jpg" />
     <Image Include="res\tex\skyboxes\skybox\front.jpg" />

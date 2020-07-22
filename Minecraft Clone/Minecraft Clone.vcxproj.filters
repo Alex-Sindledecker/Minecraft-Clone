@@ -129,10 +129,10 @@
   <ItemGroup>
     <None Include="res\shaders\block_vertex.glsl" />
     <None Include="res\shaders\block_fragment.glsl" />
-    <None Include="res\shaders\vertex.glsl" />
-    <None Include="res\shaders\fragment.glsl" />
     <None Include="res\shaders\skybox_vertex.glsl" />
     <None Include="res\shaders\skybox_fragment.glsl" />
+    <None Include="res\shaders\quad_vertex.glsl" />
+    <None Include="res\shaders\quad_fragment.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\tex\sample.png">
@@ -157,6 +157,15 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="res\tex\skyboxes\skybox\back.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\my_skybox\Top.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\my_skybox\Side.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\tex\skyboxes\my_skybox\Bottom.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
