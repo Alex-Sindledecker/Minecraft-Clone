@@ -96,7 +96,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\owner\Desktop\Minecraft-Clone\Minecraft Clone\vendor\pugixml\src;$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone\vendor\pugixml\src;$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -114,7 +114,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\owner\Desktop\Minecraft-Clone\Minecraft Clone\vendor\pugixml\src;$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Minecraft Clone\vendor\pugixml\src;$(SolutionDir)Minecraft Clone/vendor/;$(SolutionDir)Minecraft Clone\src\;$(SolutionDir)Minecraft Clone\vendor\glm</AdditionalIncludeDirectories>
       <PrecompiledHeader>Create</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
