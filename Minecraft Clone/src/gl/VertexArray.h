@@ -11,6 +11,8 @@ public:
 	void bind() const;
 	void unbind()const;
 
+	void setIndexBufer(VertexBuffer* buffer);
+
 	template<class T>
 	void push(const VertexBuffer& data, GLuint size, size_t offset)
 	{
@@ -50,4 +52,5 @@ public:
 private:
 	GLuint m_id;
 	unsigned int m_slot;
+	VertexBuffer* m_index_buffer;
 };

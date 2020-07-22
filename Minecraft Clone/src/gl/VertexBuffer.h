@@ -5,7 +5,7 @@
 class VertexBuffer
 {
 public:
-	VertexBuffer() {}
+	VertexBuffer() { m_id = 0; }
 	VertexBuffer(const void* data, size_t size, GLenum type = GL_ARRAY_BUFFER);
 	~VertexBuffer();
 
