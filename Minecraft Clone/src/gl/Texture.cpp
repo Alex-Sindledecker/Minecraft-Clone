@@ -75,11 +75,41 @@ void Texture2D::init(const char* src)
 		}
 	#endif
 	Image image = loadImage(src);
-	glTexImage2D(GL_TEXTURE_2D, 0, image.format, image.width, image.height, 0, image.format, GL_UNSIGNED_BYTE, image.pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.width, image.height, 0, image.format, GL_UNSIGNED_BYTE, image.pixels);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	stbi_image_free(image.pixels);
+}
+
+void Texture2D::init(void* pixels, unsigned int width, unsigned int height, unsigned int channels)
+{
+	glBindTexture(GL_TEXTURE_2D, m_id);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	GLenum format;
+	switch (channels)
+	{
+	case 3:
+		format = GL_RGB;
+		break;
+	case 4:
+		format = GL_RGBA;
+		break;
+	case 1:
+		format = GL_RED;
+		break;
+	case 2:
+		format = GL_RG;
+		break;
+	default:
+		format = GL_RED;
+		break;
+	}
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format, GL_UNSIGNED_BYTE, pixels);
+	glGenerateMipmap(GL_TEXTURE_2D);
 }
 
 Texture3D::Texture3D()

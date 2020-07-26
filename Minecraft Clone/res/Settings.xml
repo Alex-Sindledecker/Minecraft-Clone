@@ -5,7 +5,7 @@
 	</GameplaySettings>
 	<GraphicsSettings>
 		<GLVersion major="3" minor="3" />
-		<WindowSize width="1920" height="1080" fullscreen="true" />
+		<WindowSize width="1920" height="1080" fullscreen="false" />
 		<Antiailising enabled="true" level="4" />
 		<AnisotropicFiltering enabled="false" level="0" />
 	</GraphicsSettings>

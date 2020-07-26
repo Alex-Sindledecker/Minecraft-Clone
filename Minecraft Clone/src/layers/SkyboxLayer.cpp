@@ -1,50 +1,42 @@
 #include "pch.h"
 #include "SkyboxLayer.h"
 #include "Window.h"
+#include "toolbox.h"
 
-float mesh_vertices[] = 
+unsigned int skybox_indices[] =
 {
-    -1.0f,  1.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f,
-    1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
+    //font
+    0, 1, 2,
+    2, 3, 0,
+    // right
+    1, 5, 6,
+    6, 2, 1,
+    // back
+    7, 6, 5,
+    5, 4, 7,
+    // left
+    4, 0, 3,
+    3, 7, 4,
+    // bottom
+    4, 5, 1,
+    1, 0, 4,
+    // top
+    3, 2, 6,
+    6, 7, 3
+};
 
-    -1.0f, -1.0f,  1.0f,
-    -1.0f, -1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,
-
-    1.0f, -1.0f, -1.0f,
-    1.0f, -1.0f,  1.0f,
-    1.0f,  1.0f,  1.0f,
-    1.0f,  1.0f,  1.0f,
-    1.0f,  1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f,
-
-    -1.0f, -1.0f,  1.0f,
-    -1.0f,  1.0f,  1.0f,
-    1.0f,  1.0f,  1.0f,
-    1.0f,  1.0f,  1.0f,
-    1.0f, -1.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,
-
-    -1.0f,  1.0f, -1.0f,
-    1.0f,  1.0f, -1.0f,
-    1.0f,  1.0f,  1.0f,
-    1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f, -1.0f,
-
-    -1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f,  1.0f,
-    1.0f, -1.0f, -1.0f,
-    1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f,  1.0f,
-    1.0f, -1.0f,  1.0f
+float skybox_vertices[] =
+{
+    //front
+    -1.0, -1.0,  1.0,
+     1.0, -1.0,  1.0,
+     1.0,  1.0,  1.0,
+    -1.0,  1.0,  1.0,
+    // back
+    -1.0, -1.0, -1.0,
+     1.0, -1.0, -1.0,
+     1.0,  1.0, -1.0,
+    -1.0,  1.0, -1.0
 };
 
 void SkyboxLayer::onCreate()
@@ -54,26 +46,29 @@ void SkyboxLayer::onCreate()
     sensitivity = 0.05, camera_speed = 10;
     m_window->setMousePos(m_window->getSize() / glm::vec2(2));
 
+    VertexBufferPtr element_vbo = ResourceManager::getVertexBuffer("skybox_ebo");
     VertexBufferPtr vbo = ResourceManager::getVertexBuffer("skybox_vbo");
-    vbo->init(mesh_vertices, sizeof(mesh_vertices));
-
+    element_vbo->init(skybox_indices, sizeof(skybox_indices), GL_ELEMENT_ARRAY_BUFFER);
+    vbo->init(skybox_vertices, sizeof(skybox_vertices));
     skybox_mesh = ResourceManager::getVertexArray("skybox_vao");
     skybox_mesh->bind();
+    element_vbo->bind();
     skybox_mesh->push<float>(*vbo.get(), 3, 0);
     skybox_mesh->unbind();
+    element_vbo->unbind();
 
     skybox_shader = ResourceManager::getShader("skybox_shader");
     skybox_shader->init("res/shaders/skybox_vertex.glsl", "res/shaders/skybox_fragment.glsl");
 
     skybox_cubemap = ResourceManager::getTexture3D("skybox_texture");
-    skybox_cubemap->init({ 
-            "res/tex/skyboxes/skybox/top.jpg",
-            "res/tex/skyboxes/skybox/bottom.jpg",
-            "res/tex/skyboxes/skybox/left.jpg",
-            "res/tex/skyboxes/skybox/right.jpg",
-            "res/tex/skyboxes/skybox/front.jpg",
-            "res/tex/skyboxes/skybox/back.jpg"
-    });
+    skybox_cubemap->init({
+        "res/tex/skyboxes/my_skybox/Top.png",
+        "res/tex/skyboxes/my_skybox/Bottom.png",
+        "res/tex/skyboxes/my_skybox/Side.png",
+        "res/tex/skyboxes/my_skybox/Side.png",
+        "res/tex/skyboxes/my_skybox/Side.png",
+        "res/tex/skyboxes/my_skybox/Side.png"
+        });
 }
 
 void SkyboxLayer::onUpdate(float dt)
@@ -101,16 +96,17 @@ void SkyboxLayer::onUpdate(float dt)
 
 void SkyboxLayer::onRender()
 {
+    glDepthMask(GL_FALSE);
+
+    glm::mat4 proj = camera.getProjectionMatrix() * glm::mat4(glm::mat3(camera.getViewMatrix()));
+
     skybox_shader->use();
-    skybox_shader->setUniformMatrix4("pv", 
-        camera.getProjectionMatrix() *
-        glm::mat4(glm::mat3(camera.getViewMatrix()))
-    );
+    skybox_shader->setUniformMatrix4("pv", proj);
     skybox_cubemap->bind();
     skybox_mesh->bind();
-    glDepthMask(GL_FALSE);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    glDepthMask(GL_TRUE);
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
     skybox_mesh->unbind();
     skybox_cubemap->unbind();
+
+    glDepthMask(GL_TRUE);
 }

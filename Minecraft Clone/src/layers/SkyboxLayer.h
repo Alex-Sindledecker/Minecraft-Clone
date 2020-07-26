@@ -18,4 +18,6 @@ private:
 	Texture3DPtr skybox_cubemap;
 	PerspectiveCamera camera;
 	float sensitivity, camera_speed;
+
+	glm::mat4 model;
 };

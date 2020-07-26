@@ -176,6 +176,7 @@
     <ClCompile Include="src\gl\VertexArray.cpp" />
     <ClCompile Include="src\gl\VertexBuffer.cpp" />
     <ClCompile Include="src\layers\Layer.cpp" />
+    <ClCompile Include="src\layers\NoiseTestingLayer.cpp" />
     <ClCompile Include="src\layers\SkyboxLayer.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\gl\Shader.cpp" />
@@ -183,6 +184,7 @@
     <ClCompile Include="src\game\Transformable.cpp" />
     <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="src\world\terrain\TerrainGenerator.cpp" />
     <ClCompile Include="vendor\FastNoise\FastNoise.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -215,6 +217,7 @@
     <ClInclude Include="src\layers\Layer.h" />
     <ClInclude Include="src\gl\VertexArray.h" />
     <ClInclude Include="src\gl\VertexBuffer.h" />
+    <ClInclude Include="src\layers\NoiseTestingLayer.h" />
     <ClInclude Include="src\layers\SkyboxLayer.h" />
     <ClInclude Include="src\ResourceManager.h" />
     <ClInclude Include="src\Logger.h" />
@@ -224,6 +227,8 @@
     <ClInclude Include="src\toolbox.h" />
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\game\Transformable.h" />
+    <ClInclude Include="src\world\Block.h" />
+    <ClInclude Include="src\world\terrain\TerrainGenerator.h" />
     <ClInclude Include="vendor\FastNoise\FastNoise.h" />
     <ClInclude Include="vendor\pugixml\src\pugiconfig.hpp" />
     <ClInclude Include="vendor\pugixml\src\pugixml.hpp" />

@@ -22,6 +22,7 @@ public:
 	void bind() override;
 	void unbind() override;
 	void init(const char* src);
+	void init(void* pixels, unsigned int width, unsigned int height, unsigned int channels);
 };
 
 struct CubemapTextures
