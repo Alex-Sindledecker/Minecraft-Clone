@@ -21,18 +21,18 @@
     <ClCompile Include="..\dependencies\GLAD\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="gl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gl.cpp">
+    <ClCompile Include="Application\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
+    <ClInclude Include="gl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="gl.h">
+    <ClInclude Include="Application\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

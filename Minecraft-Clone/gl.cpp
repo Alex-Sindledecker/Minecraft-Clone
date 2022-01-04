@@ -1,7 +1,10 @@
 //Contains opengl functionality
 
-#include "pch.h"
 #include "gl.h"
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
 
 namespace gl
 {
