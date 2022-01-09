@@ -9,6 +9,7 @@ namespace gl
 {
 	typedef GLuint ShaderProgram, Shader;
 	typedef GLuint Buffer, VertexArray;
+	typedef GLuint TextureID;
 
 	struct VertexAttribute
 	{
@@ -28,6 +29,8 @@ namespace gl
 	Buffer createBuffer(GLenum bufferType, void* bufferData, size_t bufferSize, GLenum access);
 	VertexArray createVertexArray(const std::vector<VertexAttribute>& attributes);
 	VertexArray createVertexArray(const std::vector<VertexAttribute>& attributes, Buffer elementBuffer);
+
+	TextureID createTextureFromImage(const char* imagePath);
 
 	void enableWireframeDraw();
 	void disableWireframeDraw();

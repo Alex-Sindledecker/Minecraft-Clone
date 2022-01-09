@@ -18,10 +18,11 @@ void World::render()
 {
 	static gl::ShaderProgram shaderProgram = 0;
 	static gl::VertexArray vao = 0;
+	static gl::TextureID tex;
 
 	if (shaderProgram == 0)
 	{
-		shaderProgram = gl::loadShader("Shaders/testVertex.glsl", "Shaders/testFragment.glsl");
+		shaderProgram = gl::loadShader("res/shaders/testVertex.glsl", "res/shaders/testFragment.glsl");
 
 		float vertices[] = {
 			-0.5f, -0.5f, 0.0f, // left  
@@ -51,11 +52,14 @@ void World::render()
 
 		vao = gl::createVertexArray(attributes, EBO);
 
+		tex = gl::createTextureFromImage("res/textures/donut.png");
+
 		camera.updateProjection();
 		camera.updateView();
 	}
 
 	glUseProgram(shaderProgram);
+	glBindTexture(GL_TEXTURE_2D, tex);
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "mvp"), 1, GL_FALSE, &camera.getViewProjection()[0][0]);
 	gl::drawElements(vao, 6);
 }

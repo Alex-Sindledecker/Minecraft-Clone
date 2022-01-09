@@ -6,6 +6,8 @@
 #include <fstream>
 #include <sstream>
 
+#include <stb_image.h>
+
 namespace gl
 {
 	static int statusSuccess;
@@ -20,6 +22,8 @@ namespace gl
 		}
 
 		glEnable(GL_DEPTH_TEST);
+
+		stbi_set_flip_vertically_on_load(1);
 	}
 
 	ShaderProgram loadShader(const char* vertexPath, const char* fragmentPath)
@@ -138,6 +142,49 @@ namespace gl
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 		return vao;
+	}
+
+	TextureID createTextureFromImage(const char* imagePath)
+	{
+		int width, height, channels;
+		unsigned char* pixels = stbi_load(imagePath, &width, &height, &channels, NULL);
+		if (!pixels)
+			return 0;
+
+		TextureID id;
+		glGenTextures(1, &id);
+		glBindTexture(GL_TEXTURE_2D, id);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+		GLenum format;
+		switch (channels)
+		{
+		case 1:
+			format = GL_RED;
+			break;
+		case 2:
+			format = GL_RG;
+			break;
+		case 3:
+			format = GL_RGB;
+			break;
+		case 4:
+			format = GL_RGBA;
+			break;
+		default:
+			glDeleteTextures(1, &id);
+			return 0;
+		}
+
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format, GL_UNSIGNED_BYTE, pixels);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		stbi_image_free(pixels);
+
+		return id;
 	}
 
 	void enableWireframeDraw()

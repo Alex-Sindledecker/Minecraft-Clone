@@ -96,7 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\GLFW\include\;$(SolutionDir)dependencies\GLM\;$(SolutionDir)dependencies\GLAD\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\STB\;$(SolutionDir)dependencies\GLFW\include\;$(SolutionDir)dependencies\GLM\;$(SolutionDir)dependencies\GLAD\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch/pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -115,7 +115,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\GLFW\include\;$(SolutionDir)dependencies\GLM\;$(SolutionDir)dependencies\GLAD\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\STB\;$(SolutionDir)dependencies\GLFW\include\;$(SolutionDir)dependencies\GLM\;$(SolutionDir)dependencies\GLAD\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch/pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -134,7 +134,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\GLFW\include\;$(SolutionDir)dependencies\GLM\;$(SolutionDir)dependencies\GLAD\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\STB\;$(SolutionDir)dependencies\GLFW\include\;$(SolutionDir)dependencies\GLM\;$(SolutionDir)dependencies\GLAD\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch/pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -153,7 +153,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\GLFW\include\;$(SolutionDir)dependencies\GLM\;$(SolutionDir)dependencies\GLAD\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)dependencies\STB\;$(SolutionDir)dependencies\GLFW\include\;$(SolutionDir)dependencies\GLM\;$(SolutionDir)dependencies\GLAD\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch/pch.h</PrecompiledHeaderFile>
     </ClCompile>
@@ -176,13 +176,19 @@
     <ClCompile Include="Application\Application.cpp" />
     <ClCompile Include="Application\World.cpp" />
     <ClCompile Include="Cameras\FpsCamera.cpp" />
+    <ClCompile Include="Chunk\Block.cpp" />
+    <ClCompile Include="Chunk\Chunk.cpp" />
+    <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="gl.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\dependencies\STB\stb_image.h" />
     <ClInclude Include="Application\Application.h" />
     <ClInclude Include="Application\World.h" />
     <ClInclude Include="Cameras\FpsCamera.h" />
+    <ClInclude Include="Chunk\Block.h" />
+    <ClInclude Include="Chunk\Chunk.h" />
     <ClInclude Include="gl.h" />
   </ItemGroup>
   <ItemGroup>
