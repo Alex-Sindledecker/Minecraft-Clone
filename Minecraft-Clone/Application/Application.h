@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../gl.h"
-#include <GLFW/glfw3.h>
+#include "World.h"
 
 enum class GameState
 {
@@ -22,12 +21,16 @@ public:
 	int init();
 	void run();
 	void deinit();
+	float getWindowWidth();
+	float getWindowHeight();
+	float getAspectRatio();
+	GLFWwindow* getWindow();
 
 	Application(Application const&) = delete;
 	void operator=(Application const&) = delete;
 
 private:
-	Application() {}
+	Application() : world(World::get()) {}
 	~Application() {}
 
 	void mainMenuProc(float dt);
@@ -37,6 +40,10 @@ private:
 	void activeProc(float dt);
 	void pausedProc(float dt);
 
+	World& world;
+
 	GLFWwindow* window;
 	float windowWidth, windowHeight;
+
+	GameState gameState;
 };

@@ -27,12 +27,24 @@
     <ClCompile Include="Application\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Application\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Cameras\FpsCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Application\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Cameras\FpsCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

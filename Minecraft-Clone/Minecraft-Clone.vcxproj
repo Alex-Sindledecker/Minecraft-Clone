@@ -174,11 +174,15 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Application\Application.cpp" />
+    <ClCompile Include="Application\World.cpp" />
+    <ClCompile Include="Cameras\FpsCamera.cpp" />
     <ClCompile Include="gl.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\Application.h" />
+    <ClInclude Include="Application\World.h" />
+    <ClInclude Include="Cameras\FpsCamera.h" />
     <ClInclude Include="gl.h" />
   </ItemGroup>
   <ItemGroup>

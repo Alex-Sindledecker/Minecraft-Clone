@@ -39,7 +39,7 @@ int Application::init()
 
 void Application::run()
 {
-	GameState gameState = GameState::Active;
+	gameState = GameState::Active;
 
 	float dt = 1.f / 60.f;
 
@@ -74,6 +74,9 @@ void Application::run()
 		//Update window and check for events
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+
+		dt = glfwGetTime();
+		glfwSetTime(0);
 	}
 }
 
@@ -81,6 +84,26 @@ void Application::deinit()
 {
 	glfwDestroyWindow(window);
 	glfwTerminate();
+}
+
+float Application::getWindowWidth()
+{
+	return windowWidth;
+}
+
+float Application::getWindowHeight()
+{
+	return windowHeight;
+}
+
+float Application::getAspectRatio()
+{
+	return windowWidth / windowHeight;
+}
+
+GLFWwindow* Application::getWindow()
+{
+	return window;
 }
 
 void Application::mainMenuProc(float dt)
@@ -101,51 +124,13 @@ void Application::loadingProc(float dt)
 
 void Application::activeProc(float dt)
 {
-	static gl::ShaderProgram shaderProgram = 0;
-	static gl::VertexArray vao = 0;
-	static glm::mat4 mvp = glm::identity<glm::mat4>();
-
-	if (shaderProgram == 0)
-	{
-		shaderProgram = gl::loadShader("Shaders/testVertex.glsl", "Shaders/testFragment.glsl");
-
-		float vertices[] = {
-			-0.5f, -0.5f, 0.0f, // left  
-			 0.5f, -0.5f, 0.0f, // right 
-			 0.5f,  0.5f, 0.0f,  // top
-			 -0.5f, 0.5f, 0.f
-		};
-
-		unsigned int indices[] = {
-			0, 1, 2, 2, 3, 0
-		};
-
-		gl::Buffer VBO = gl::createBuffer(GL_ARRAY_BUFFER, vertices, sizeof(vertices), GL_STATIC_DRAW);
-		gl::Buffer EBO = gl::createBuffer(GL_ELEMENT_ARRAY_BUFFER, indices, sizeof(indices), GL_STATIC_DRAW);
-
-		std::vector<gl::VertexAttribute> attributes = {
-			{
-				(void*)0,
-				3,
-				0,
-				VBO,
-				3 * sizeof(float),
-				GL_FLOAT,
-				GL_ARRAY_BUFFER
-			}
-		};
-
-		vao = gl::createVertexArray(attributes, EBO);
-
-		mvp = glm::perspective(glm::radians(45.f), (float)windowWidth / (float)windowHeight, 0.1f, 100.f) *
-			glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-	}
-
-	glUseProgram(shaderProgram);
-	glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "mvp"), 1, GL_FALSE, &mvp[0][0]);
-	gl::drawElements(vao, 6);
+	world.update(dt);
+	world.render();
 }
 
 void Application::pausedProc(float dt)
 {
+	world.render();
+
+	//pause screen
 }
