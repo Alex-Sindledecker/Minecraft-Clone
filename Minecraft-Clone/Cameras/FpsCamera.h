@@ -8,7 +8,8 @@ public:
 	void update(float dt);
 	void updateProjection();
 	void updateView();
-	glm::mat4 getViewProjection();
+	glm::mat4 getViewProjection() const;
+	glm::vec3 getPos();
 
 private:
 	glm::mat4 projection;

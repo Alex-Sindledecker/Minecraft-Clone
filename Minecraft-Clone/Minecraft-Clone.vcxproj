@@ -192,6 +192,8 @@
     <ClInclude Include="gl.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="res\shaders\ChunkFragment.glsl" />
+    <None Include="res\shaders\ChunkVertex.glsl" />
     <None Include="Shaders\testFragment.glsl" />
     <None Include="Shaders\testVertex.glsl" />
   </ItemGroup>

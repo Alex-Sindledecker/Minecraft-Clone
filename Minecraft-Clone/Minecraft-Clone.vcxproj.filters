@@ -69,5 +69,7 @@
   <ItemGroup>
     <None Include="Shaders\testVertex.glsl" />
     <None Include="Shaders\testFragment.glsl" />
+    <None Include="res\shaders\ChunkVertex.glsl" />
+    <None Include="res\shaders\ChunkFragment.glsl" />
   </ItemGroup>
 </Project>

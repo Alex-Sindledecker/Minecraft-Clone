@@ -60,7 +60,12 @@ void FpsCamera::updateView()
 	//view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 }
 
-glm::mat4 FpsCamera::getViewProjection()
+glm::mat4 FpsCamera::getViewProjection() const
 {
 	return projection * view;
+}
+
+glm::vec3 FpsCamera::getPos()
+{
+	return pos;
 }

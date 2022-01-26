@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../gl.h"
-#include <GLFW/glfw3.h>
+#include "../Chunk/Chunk.h"
 
 #include "../Cameras/FpsCamera.h"
 
@@ -10,6 +9,7 @@ class World
 public:
 	static World& get();
 
+	void init();
 	void update(float dt);
 	void render();
 
@@ -19,6 +19,8 @@ public:
 private:
 	World() {}
 	~World() {}
+
+	std::vector<Chunk> chunks;
 
 	FpsCamera camera;
 };

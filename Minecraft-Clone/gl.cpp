@@ -107,7 +107,10 @@ namespace gl
 			glBindBuffer(att.bufferType, att.buffer);
 
 			glEnableVertexAttribArray(i);
-			glVertexAttribPointer(i, att.elements, att.dataType, GL_FALSE, att.stride, att.offset);
+			if (att.elements == 1 && (att.dataType == GL_UNSIGNED_INT || att.dataType == GL_INT))
+				glVertexAttribIPointer(i, att.elements, att.dataType, att.stride, att.offset);
+			else
+				glVertexAttribPointer(i, att.elements, att.dataType, GL_FALSE, att.stride, att.offset);
 			glVertexAttribDivisor(i, att.divisor);
 		}
 
@@ -132,7 +135,10 @@ namespace gl
 			glBindBuffer(att.bufferType, att.buffer);
 
 			glEnableVertexAttribArray(i);
-			glVertexAttribPointer(i, att.elements, att.dataType, GL_FALSE, att.stride, att.offset);
+			if (att.elements == 1 && (att.dataType == GL_UNSIGNED_INT || att.dataType == GL_INT))
+				glVertexAttribIPointer(i, att.elements, att.dataType, att.stride, att.offset);
+			else
+				glVertexAttribPointer(i, att.elements, att.dataType, GL_FALSE, att.stride, att.offset);
 			glVertexAttribDivisor(i, att.divisor);
 		}
 
@@ -201,6 +207,7 @@ namespace gl
 	{
 		glBindVertexArray(vao);
 		glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+		glBindVertexArray(0);
 	}
 
 	void drawElements(VertexArray vao, unsigned int elementCount)

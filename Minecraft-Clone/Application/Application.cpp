@@ -9,8 +9,8 @@ Application& Application::get()
 {
 	static Application app;
 
-	app.windowWidth = 800;
-	app.windowHeight = 600;
+	app.windowWidth = 1280;
+	app.windowHeight = 720;
 
 	return app;
 }
@@ -39,7 +39,7 @@ int Application::init()
 
 void Application::run()
 {
-	gameState = GameState::Active;
+	gameState = GameState::WorldCreate;
 
 	float dt = 1.f / 60.f;
 
@@ -116,6 +116,9 @@ void Application::worldSelectProc(float dt)
 
 void Application::worldCreateProc(float dt)
 {
+	world.init();
+
+	gameState = GameState::Active;
 }
 
 void Application::loadingProc(float dt)
