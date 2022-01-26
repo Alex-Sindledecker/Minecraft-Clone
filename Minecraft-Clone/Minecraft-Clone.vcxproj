@@ -178,6 +178,7 @@
     <ClCompile Include="Cameras\FpsCamera.cpp" />
     <ClCompile Include="Chunk\Block.cpp" />
     <ClCompile Include="Chunk\Chunk.cpp" />
+    <ClCompile Include="Chunk\ChunkMesh.cpp" />
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="gl.cpp" />
     <ClCompile Include="main.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="Cameras\FpsCamera.h" />
     <ClInclude Include="Chunk\Block.h" />
     <ClInclude Include="Chunk\Chunk.h" />
+    <ClInclude Include="Chunk\ChunkMesh.h" />
     <ClInclude Include="gl.h" />
   </ItemGroup>
   <ItemGroup>

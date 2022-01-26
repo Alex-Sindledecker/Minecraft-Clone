@@ -1,14 +1,13 @@
 #pragma once
 
-#include "../gl.h"
-#include <GLFW/glfw3.h>
+#include "ChunkMesh.h"
 
 #include "../Cameras/FpsCamera.h"
 
 #include <array>
 #include <glm/glm.hpp>
 
-#include "Block.h"
+
 
 class Chunk
 {
@@ -24,17 +23,15 @@ public:
 	void fetchBlocks()
 	*/
 	void buildMesh(Chunk* left, Chunk* right, Chunk* front, Chunk* back);
-
 	void render(const FpsCamera& camera);
 
 	glm::vec3 getPos();
 
 private:
-	gl::VertexArray vao;
-	gl::Buffer vbo;
+	
 	gl::ShaderProgram chunkShader;
-	unsigned int vertexCount;
+	ChunkMesh mesh;
 
-	std::vector<Block> blocks;
+	BlockTools::BlockList blocks;
 	glm::vec3 pos;
 };

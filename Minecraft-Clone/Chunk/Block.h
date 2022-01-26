@@ -22,7 +22,8 @@ struct Block
 
 namespace BlockTools
 {
-	typedef GLuint CompressedBlockVertex;
+	using CompressedBlockVertex = GLuint;
+	using BlockList = std::vector<Block>;
 
 	//For testing only
 	struct _VertexInfo
