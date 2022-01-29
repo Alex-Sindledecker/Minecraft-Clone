@@ -192,6 +192,8 @@
     <ClInclude Include="Chunk\Chunk.h" />
     <ClInclude Include="Chunk\ChunkMesh.h" />
     <ClInclude Include="gl.h" />
+    <ClInclude Include="Utils\Defs.h" />
+    <ClInclude Include="Utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\shaders\ChunkFragment.glsl" />

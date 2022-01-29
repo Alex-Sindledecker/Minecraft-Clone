@@ -3,7 +3,7 @@
 layout (location = 0) in uint vertex;
 
 uniform mat4 mvp;
-uniform vec3 chunkPos;
+uniform vec2 chunkPos;
 
 struct VertexInfo
 {
@@ -31,5 +31,5 @@ VertexInfo decompressVertex(uint vertex)
 void main()
 {
    VertexInfo vertexInfo = decompressVertex(vertex);
-   gl_Position = mvp * vec4(vertexInfo.pos + chunkPos, 1.0);
+   gl_Position = mvp * vec4(vertexInfo.pos + vec3(chunkPos.x, 0, chunkPos.y), 1.0);
 }

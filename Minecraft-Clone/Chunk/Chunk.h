@@ -10,7 +10,7 @@
 class Chunk
 {
 public:
-	Chunk(glm::vec3 pos);
+	Chunk(glm::vec2 pos);
 	//Move constructor (move the contents of 'chunk' into this chunk)
 	Chunk(Chunk&& chunk) noexcept;
 	~Chunk();
@@ -23,7 +23,7 @@ public:
 	void buildMesh(Chunk* left, Chunk* right, Chunk* front, Chunk* back);
 	void render(const FpsCamera& camera);
 
-	glm::vec3 getPos();
+	glm::vec2 getPos();
 
 private:
 	
@@ -31,5 +31,5 @@ private:
 	ChunkMesh mesh;
 
 	BlockTools::BlockList blocks;
-	glm::vec3 pos;
+	glm::vec2 pos;
 };

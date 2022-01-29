@@ -5,12 +5,15 @@
 
 #include <iostream>
 
+const int DEFAULT_WINDOW_WIDTH = 1280;
+const int DEFAULT_WINDOW_HEIGHT = 720;
+
 Application& Application::get()
 {
 	static Application app;
 
-	app.windowWidth = 1280;
-	app.windowHeight = 720;
+	app.windowWidth = DEFAULT_WINDOW_WIDTH;
+	app.windowHeight = DEFAULT_WINDOW_HEIGHT;
 
 	return app;
 }

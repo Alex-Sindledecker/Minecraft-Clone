@@ -22,8 +22,8 @@ namespace gl
 		}
 
 		glEnable(GL_DEPTH_TEST);
-		//glEnable(GL_CULL_FACE);
-		//glCullFace(GL_FRONT);
+		glEnable(GL_CULL_FACE);
+		glCullFace(GL_FRONT);
 
 		stbi_set_flip_vertically_on_load(1);
 	}
@@ -195,11 +195,13 @@ namespace gl
 
 	void enableWireframeDraw()
 	{
+		glDisable(GL_CULL_FACE);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 
 	void disableWireframeDraw()
 	{
+		glEnable(GL_CULL_FACE);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	}
 

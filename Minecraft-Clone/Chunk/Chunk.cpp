@@ -1,6 +1,6 @@
 #include "Chunk.h"
 
-Chunk::Chunk(glm::vec3 pos)
+Chunk::Chunk(glm::vec2 pos)
 	: pos(pos)
 {
 	blocks.resize(CHUNK_WIDTH * CHUNK_WIDTH * WORLD_HEIGHT);
@@ -55,11 +55,11 @@ void Chunk::render(const FpsCamera& camera)
 {
 	glUseProgram(chunkShader);
 	glUniformMatrix4fv(glGetUniformLocation(chunkShader, "mvp"), 1, GL_FALSE, &camera.getViewProjection()[0][0]);
-	glUniform3fv(glGetUniformLocation(chunkShader, "chunkPos"), 1, &pos[0]);
+	glUniform2fv(glGetUniformLocation(chunkShader, "chunkPos"), 1, &pos[0]);
 	mesh.render();
 }
 
-glm::vec3 Chunk::getPos()
+glm::vec2 Chunk::getPos()
 {
 	return pos;
 }
