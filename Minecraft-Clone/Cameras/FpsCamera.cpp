@@ -51,7 +51,7 @@ void FpsCamera::update(float dt)
 
 void FpsCamera::updateProjection()
 {
-	projection = glm::perspective(glm::radians(45.f), Application::get().getAspectRatio(), 0.1f, 100.f);
+	projection = glm::perspective(glm::radians(45.f), Application::get().getAspectRatio(), 0.1f, 256.f);
 }
 
 void FpsCamera::updateView()

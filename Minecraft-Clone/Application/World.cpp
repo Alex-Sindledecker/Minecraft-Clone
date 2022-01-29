@@ -12,9 +12,20 @@ World& World::get()
 
 void World::init()
 {
-	chunks.push_back(Chunk(glm::vec3(0, 0, 0)));
-	chunks[0].generateBlocks();
-	chunks[0].buildMesh(nullptr, nullptr, nullptr, nullptr);
+	chunks.emplace_back(glm::vec3(0, 0, 0));
+	chunks.emplace_back(glm::vec3(CHUNK_WIDTH, 0, 0));
+	chunks.emplace_back(glm::vec3(-1 * CHUNK_WIDTH, 0, 0));
+	chunks.emplace_back(glm::vec3(0, 0, -1 * CHUNK_WIDTH));
+	chunks.emplace_back(glm::vec3(0, 0, CHUNK_WIDTH));
+	for (int i = 0; i < 5; i++)
+		chunks[i].generateBlocks();
+
+	chunks[0].buildMesh(&chunks[2], &chunks[1], &chunks[4], &chunks[3]);
+	chunks[1].buildMesh(&chunks[0], nullptr, nullptr, nullptr);
+	chunks[2].buildMesh(nullptr, &chunks[0], nullptr, nullptr);
+	chunks[3].buildMesh(nullptr, nullptr, nullptr, &chunks[0]);
+	chunks[4].buildMesh(nullptr, nullptr, &chunks[0], nullptr);
+	
 
 	gl::enableWireframeDraw();
 
@@ -29,5 +40,6 @@ void World::update(float dt)
 
 void World::render()
 {
-	chunks[0].render(camera);
+	for (int i = 0; i < chunks.size(); i++)
+		chunks[i].render(camera);
 }

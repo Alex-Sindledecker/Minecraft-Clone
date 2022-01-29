@@ -4,7 +4,7 @@ ChunkMesh::ChunkMesh(const ChunkMesh& mesh)
 {
 	vao = mesh.vao;
 	vbo = mesh.vbo;
-	vertexCount = mesh.vertexCount;
+ 	vertexCount = mesh.vertexCount;
 }
 
 ChunkMesh::ChunkMesh(ChunkMesh&& mesh) noexcept
@@ -19,7 +19,7 @@ ChunkMesh::ChunkMesh(ChunkMesh&& mesh) noexcept
 
 void ChunkMesh::init()
 {
-	glGenBuffers(1, &vbo);
+	vbo = gl::createBuffer(GL_ARRAY_BUFFER, nullptr, 0, GL_DYNAMIC_DRAW);
 
 	gl::VertexAttribute att;
 	att.buffer = vbo;
@@ -42,6 +42,7 @@ void ChunkMesh::deinit()
 void ChunkMesh::buildMesh(BlockTools::BlockList& blocks, BlockTools::BlockList nearChunks[4])
 {
 	std::vector<BlockTools::CompressedBlockVertex> blockVertices;
+
 	blockVertices.reserve(CHUNK_WIDTH * CHUNK_WIDTH * WORLD_HEIGHT * 36);
 
 	int index = 0;
@@ -53,28 +54,93 @@ void ChunkMesh::buildMesh(BlockTools::BlockList& blocks, BlockTools::BlockList n
 			{
 				int i = BlockTools::getLocalBlockIndex(x, y, z);
 
-				BlockTools::CompressedBlockVertex vertex1 = BlockTools::createCompressedBlockVertex(x, y, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
-				BlockTools::CompressedBlockVertex vertex2 = BlockTools::createCompressedBlockVertex(x + 1, y, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
-				BlockTools::CompressedBlockVertex vertex3 = BlockTools::createCompressedBlockVertex(x + 1, y + 1, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
-				BlockTools::CompressedBlockVertex vertex4 = BlockTools::createCompressedBlockVertex(x, y + 1, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
+				//Vertex compression
+				BlockTools::CompressedBlockVertex vertex0 = BlockTools::createCompressedBlockVertex(x, y, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
+				BlockTools::CompressedBlockVertex vertex1 = BlockTools::createCompressedBlockVertex(x + 1, y, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
+				BlockTools::CompressedBlockVertex vertex2 = BlockTools::createCompressedBlockVertex(x + 1, y + 1, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
+				BlockTools::CompressedBlockVertex vertex3 = BlockTools::createCompressedBlockVertex(x, y + 1, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
 
-				blockVertices.push_back(vertex1);
-				blockVertices.push_back(vertex2);
-				blockVertices.push_back(vertex3);
+				BlockTools::CompressedBlockVertex vertex4 = BlockTools::createCompressedBlockVertex(x, y, z + 1, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
+				BlockTools::CompressedBlockVertex vertex5 = BlockTools::createCompressedBlockVertex(x + 1, y, z + 1, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
+				BlockTools::CompressedBlockVertex vertex6 = BlockTools::createCompressedBlockVertex(x + 1, y + 1, z + 1, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
+				BlockTools::CompressedBlockVertex vertex7 = BlockTools::createCompressedBlockVertex(x, y + 1, z + 1, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
 
-				blockVertices.push_back(vertex3);
-				blockVertices.push_back(vertex4);
-				blockVertices.push_back(vertex1);
+				if (BlockTools::getBlock(blocks, nearChunks, x, y, z - 1).id == BLOCK_ID_AIR)
+				{
+					//Front face
+					blockVertices.push_back(vertex0);
+					blockVertices.push_back(vertex1);
+					blockVertices.push_back(vertex2);
+					blockVertices.push_back(vertex2);
+					blockVertices.push_back(vertex3);
+					blockVertices.push_back(vertex0);
+				}
+				
+				if (BlockTools::getBlock(blocks, nearChunks, x + 1, y, z).id == BLOCK_ID_AIR)
+				{
+					//Right face
+					blockVertices.push_back(vertex1);
+					blockVertices.push_back(vertex5);
+					blockVertices.push_back(vertex6);
+					blockVertices.push_back(vertex6);
+					blockVertices.push_back(vertex2);
+					blockVertices.push_back(vertex1);
+				}
+
+				if (BlockTools::getBlock(blocks, nearChunks, x, y, z + 1).id == BLOCK_ID_AIR)
+				{
+					//Back face
+					blockVertices.push_back(vertex7);
+					blockVertices.push_back(vertex6);
+					blockVertices.push_back(vertex5);
+					blockVertices.push_back(vertex5);
+					blockVertices.push_back(vertex4);
+					blockVertices.push_back(vertex7);
+				}
+
+				if (BlockTools::getBlock(blocks, nearChunks, x - 1, y, z).id == BLOCK_ID_AIR)
+				{
+					//Left face
+					blockVertices.push_back(vertex4);
+					blockVertices.push_back(vertex0);
+					blockVertices.push_back(vertex3);
+					blockVertices.push_back(vertex3);
+					blockVertices.push_back(vertex7);
+					blockVertices.push_back(vertex4);
+				}
+
+				if (BlockTools::getBlock(blocks, nearChunks, x, y - 1, z).id == BLOCK_ID_AIR)
+				{
+					//Bottom face
+					blockVertices.push_back(vertex4);
+					blockVertices.push_back(vertex5);
+					blockVertices.push_back(vertex1);
+					blockVertices.push_back(vertex1);
+					blockVertices.push_back(vertex0);
+					blockVertices.push_back(vertex4);
+				}
+
+				if (BlockTools::getBlock(blocks, nearChunks, x, y + 1, z).id == BLOCK_ID_AIR)
+				{
+					//Top face
+					blockVertices.push_back(vertex3);
+					blockVertices.push_back(vertex2);
+					blockVertices.push_back(vertex6);
+					blockVertices.push_back(vertex6);
+					blockVertices.push_back(vertex7);
+					blockVertices.push_back(vertex3);
+				}
+
+				index += 8;
 			}
 		}
 	}
 
 	blockVertices.shrink_to_fit();
+
 	vertexCount = blockVertices.size();
 
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, blockVertices.size() * sizeof(BlockTools::CompressedBlockVertex), blockVertices.data(), GL_DYNAMIC_DRAW);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	gl::setBufferData(vbo, GL_ARRAY_BUFFER, blockVertices.data(), blockVertices.size() * sizeof(BlockTools::CompressedBlockVertex), GL_DYNAMIC_DRAW);
 }
 
 void ChunkMesh::render()

@@ -7,8 +7,6 @@
 #include <array>
 #include <glm/glm.hpp>
 
-
-
 class Chunk
 {
 public:

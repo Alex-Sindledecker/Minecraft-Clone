@@ -7,7 +7,6 @@
 
 class ChunkMesh
 {
-	enum class BORDER_CHUNKS {LEFT = 0, RIGHT, FRONT, BACK};
 public:
 	ChunkMesh() : vao(0), vbo(0), vertexCount(0) {}
 	ChunkMesh(const ChunkMesh& mesh);

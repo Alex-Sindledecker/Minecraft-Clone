@@ -22,6 +22,8 @@ namespace gl
 		}
 
 		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_CULL_FACE);
+		//glCullFace(GL_FRONT);
 
 		stbi_set_flip_vertically_on_load(1);
 	}
@@ -86,9 +88,7 @@ namespace gl
 	{
 		Buffer vbo;
 		glGenBuffers(1, &vbo);
-		glBindBuffer(bufferType, vbo);
-		glBufferData(bufferType, bufferSize, bufferData, access);
-		glBindBuffer(bufferType, 0);
+		setBufferData(vbo, bufferType, bufferData, bufferSize, access);
 
 		return vbo;
 	}
@@ -214,6 +214,13 @@ namespace gl
 	{
 		glBindVertexArray(vao);
 		glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, NULL);
+	}
+
+	void setBufferData(Buffer buffer, GLenum type, void* data, size_t size, GLenum access)
+	{
+		glBindBuffer(type, buffer);
+		glBufferData(type, size, data, access);
+		glBindBuffer(type, 0);
 	}
 
 }

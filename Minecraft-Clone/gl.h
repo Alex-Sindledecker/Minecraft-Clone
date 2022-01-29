@@ -36,4 +36,6 @@ namespace gl
 	void disableWireframeDraw();
 	void drawArrays(VertexArray vao, unsigned int vertexCount);
 	void drawElements(VertexArray vao, unsigned int elementCount);
+
+	void setBufferData(Buffer buffer, GLenum type, void* data, size_t size, GLenum access);
 }

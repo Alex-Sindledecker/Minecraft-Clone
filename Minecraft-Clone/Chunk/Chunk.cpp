@@ -44,10 +44,10 @@ void Chunk::generateBlocks()
 
 void Chunk::buildMesh(Chunk* left, Chunk* right, Chunk* front, Chunk* back)
 {
-	BlockTools::BlockList near[4] = { left == nullptr ? BlockTools::BlockList{0} : left->blocks,
-									  right == nullptr ? BlockTools::BlockList{ 0 } : right->blocks,
-									  front == nullptr ? BlockTools::BlockList{ 0 } : front->blocks,
-									  back == nullptr ? BlockTools::BlockList{ 0 } : back->blocks };
+	BlockTools::BlockList near[4] = { left == nullptr ? BlockTools::BlockList{} : left->blocks,
+									  right == nullptr ? BlockTools::BlockList{} : right->blocks,
+									  front == nullptr ? BlockTools::BlockList{} : front->blocks,
+									  back == nullptr ? BlockTools::BlockList{} : back->blocks };
 	mesh.buildMesh(blocks, near);
 }
 
@@ -55,6 +55,7 @@ void Chunk::render(const FpsCamera& camera)
 {
 	glUseProgram(chunkShader);
 	glUniformMatrix4fv(glGetUniformLocation(chunkShader, "mvp"), 1, GL_FALSE, &camera.getViewProjection()[0][0]);
+	glUniform3fv(glGetUniformLocation(chunkShader, "chunkPos"), 1, &pos[0]);
 	mesh.render();
 }
 
