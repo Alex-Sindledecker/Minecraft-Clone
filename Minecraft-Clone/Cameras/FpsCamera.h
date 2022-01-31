@@ -15,7 +15,7 @@ private:
 	glm::mat4 projection;
 	glm::mat4 view;
 
-	glm::vec3 pos = glm::vec3(4, 3, 3), front = glm::vec3(-4, -3, -3), up = glm::vec3(0, 1, 0);
+	glm::vec3 pos = glm::vec3(0, 2, 0), front = glm::vec3(0, 0, 0), up = glm::vec3(0, 1, 0);
 
 	float yaw = 2015.f, pitch = 0.f;
 };

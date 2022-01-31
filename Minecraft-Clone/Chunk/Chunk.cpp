@@ -63,3 +63,8 @@ glm::vec2 Chunk::getPos()
 {
 	return pos;
 }
+
+void Chunk::setPos(glm::vec2 pos)
+{
+	this->pos = pos;
+}

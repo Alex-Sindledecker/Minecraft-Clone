@@ -182,6 +182,7 @@
     <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="gl.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Utils\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\dependencies\STB\stb_image.h" />

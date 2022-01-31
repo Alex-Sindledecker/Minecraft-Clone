@@ -24,6 +24,7 @@ public:
 	void render(const FpsCamera& camera);
 
 	glm::vec2 getPos();
+	void setPos(glm::vec2 pos);
 
 private:
 	

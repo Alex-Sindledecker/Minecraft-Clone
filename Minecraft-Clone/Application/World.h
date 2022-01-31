@@ -20,7 +20,13 @@ private:
 	World() {}
 	~World() {}
 
-	std::vector<Chunk> chunks;
+	void buildChunkMesh(int x, int z);
 
+private:
+	std::vector<std::vector<Chunk>> chunks;
 	FpsCamera camera;
+	glm::vec3 origin;
+
+	int chunkIndexOffsetX = 0;
+	int chunkIndexOffsetZ;
 };
