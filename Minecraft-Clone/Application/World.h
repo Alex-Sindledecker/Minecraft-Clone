@@ -20,6 +20,8 @@ private:
 	World() {}
 	~World() {}
 
+	void cycleChunksX(int dir);
+	void cycleChunksZ(int dir);
 	void buildChunkMesh(int x, int z);
 
 private:

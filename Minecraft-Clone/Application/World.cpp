@@ -54,67 +54,16 @@ void World::update(float dt)
 	glm::vec3 distanceFromOrigin = camera.getPos() - origin;
 
 	if (distanceFromOrigin.x > CHUNK_WIDTH)
-	{
-		int x = chunkIndexOffsetX;
-		chunkIndexOffsetX = (chunkIndexOffsetX + 1) % CHUNK_RENDER_DISTANCE;
-
-		int swapEnd = utils::loopMod(x - 1, CHUNK_RENDER_DISTANCE);
-		for (int z = 0; z < CHUNK_RENDER_DISTANCE; z++)
-		{
-			chunks[z][x].setPos(chunks[z][swapEnd].getPos() + glm::vec2(CHUNK_WIDTH, 0));
-
-			chunks[z][x].generateBlocks();
-			buildChunkMesh(x, z);
-		}
-		origin.x += CHUNK_WIDTH;
-	}
+		cycleChunksX(1);
 
 	else if (-distanceFromOrigin.x > CHUNK_WIDTH)
-	{
-		int x = chunkIndexOffsetX;
-		chunkIndexOffsetX = utils::loopMod(chunkIndexOffsetX - 1, CHUNK_RENDER_DISTANCE);
-
-		int swapEnd = utils::loopMod(x - 1, CHUNK_RENDER_DISTANCE);
-		for (int z = 0; z < CHUNK_RENDER_DISTANCE; z++)
-		{
-			chunks[z][swapEnd].setPos(chunks[z][x].getPos() - glm::vec2(CHUNK_WIDTH, 0));
-
-			chunks[z][swapEnd].generateBlocks();
-			buildChunkMesh(swapEnd, z);
-		}
-		origin.x -= CHUNK_WIDTH;
-	}
+		cycleChunksX(-1);
 
 	if (distanceFromOrigin.z > CHUNK_WIDTH)
-	{
-		int z = chunkIndexOffsetZ;
-		chunkIndexOffsetZ = (chunkIndexOffsetZ + 1) % CHUNK_RENDER_DISTANCE;
-		for (int x = 0; x < CHUNK_RENDER_DISTANCE; x++)
-		{
-			int swapEnd = utils::loopMod(z - 1, CHUNK_RENDER_DISTANCE);
-			chunks[z][x].setPos(chunks[swapEnd][x].getPos() + glm::vec2(0, CHUNK_WIDTH));
-
-			chunks[z][x].generateBlocks();
-			buildChunkMesh(x, z);
-		}
-		origin.z += CHUNK_WIDTH;
-	}
+		cycleChunksZ(1);
 
 	else if (-distanceFromOrigin.z > CHUNK_WIDTH)
-	{
-		int z = chunkIndexOffsetZ;
-		chunkIndexOffsetZ = utils::loopMod(chunkIndexOffsetZ - 1, CHUNK_RENDER_DISTANCE);
-
-		int swapEnd = utils::loopMod(z - 1, CHUNK_RENDER_DISTANCE);
-		for (int x = 0; x < CHUNK_RENDER_DISTANCE; x++)
-		{
-			chunks[swapEnd][x].setPos(chunks[z][x].getPos() - glm::vec2(0, CHUNK_WIDTH));
-
-			chunks[swapEnd][x].generateBlocks();
-			buildChunkMesh(x, swapEnd);
-		}
-		origin.z -= CHUNK_WIDTH;
-	}
+		cycleChunksZ(-1);
 
 	std::cout << camera.getPos().x << ", " << camera.getPos().z << std::endl;
 }
@@ -128,6 +77,56 @@ void World::render()
 			chunks[z][x].render(camera);
 		}
 	}
+}
+
+void World::cycleChunksX(int dir)
+{
+	int x = chunkIndexOffsetX;
+	chunkIndexOffsetX = utils::loopMod(chunkIndexOffsetX + dir, CHUNK_RENDER_DISTANCE);
+
+	int cycleEnd = utils::loopMod(x - 1, CHUNK_RENDER_DISTANCE);
+	int cycleA = x, cycleB = cycleEnd;
+
+	if (dir == -1)
+	{
+		cycleA = cycleEnd;
+		cycleB = x;
+	}
+
+	for (int z = 0; z < CHUNK_RENDER_DISTANCE; z++)
+	{
+		chunks[z][cycleA].setPos(chunks[z][cycleB].getPos() + glm::vec2(CHUNK_WIDTH * dir, 0));
+
+		chunks[z][cycleA].generateBlocks();
+		buildChunkMesh(cycleA, z);
+	}
+
+	origin.x += CHUNK_WIDTH * dir;
+}
+
+void World::cycleChunksZ(int dir)
+{
+	int z = chunkIndexOffsetZ;
+	chunkIndexOffsetZ = utils::loopMod(chunkIndexOffsetZ + dir, CHUNK_RENDER_DISTANCE);
+
+	int cycleEnd = utils::loopMod(z - 1, CHUNK_RENDER_DISTANCE);
+	int cycleA = z, cycleB = cycleEnd;
+
+	if (dir == -1)
+	{
+		cycleA = cycleEnd;
+		cycleB = z;
+	}
+
+	for (int x = 0; x < CHUNK_RENDER_DISTANCE; x++)
+	{
+		chunks[cycleA][x].setPos(chunks[cycleB][x].getPos() + glm::vec2(0, CHUNK_WIDTH * dir));
+
+		chunks[cycleA][x].generateBlocks();
+		buildChunkMesh(x, cycleA);
+	}
+
+	origin.z += CHUNK_WIDTH * dir;
 }
 
 void World::buildChunkMesh(int x, int z)
