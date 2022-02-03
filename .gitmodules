@@ -1,3 +1,6 @@
 [submodule "dependencies/GLM"]
 	path = dependencies/GLM
 	url = https://github.com/g-truc/glm
+[submodule "PerlinNoise"]
+	path = dependencies/NOISE/Perlin/
+	url = https://github.com/Reputeless/PerlinNoise
