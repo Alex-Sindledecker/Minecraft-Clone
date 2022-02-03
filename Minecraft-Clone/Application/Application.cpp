@@ -29,7 +29,7 @@ int Application::init()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	//Window initialization
-	window = glfwCreateWindow(windowWidth, windowHeight, "LearnOpenGL", NULL, NULL);
+	window = glfwCreateWindow(windowWidth, windowHeight, "Minecraft Clone", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;

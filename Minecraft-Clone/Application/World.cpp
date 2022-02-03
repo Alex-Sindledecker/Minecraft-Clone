@@ -15,13 +15,18 @@ World& World::get()
 
 void World::init()
 {
+	camera.setPos(glm::vec3(0, 2, 0));
+	origin = camera.getPos();
+
 	double blockGenTime = utils::getElapsedTime<utils::Milliseconds>([&]() {
 		for (int z = 0; z < CHUNK_RENDER_DISTANCE; z++)
 		{
 			chunks.push_back(std::vector<Chunk>());
 			for (int x = 0; x < CHUNK_RENDER_DISTANCE; x++)
 			{
-				chunks[z].emplace_back(glm::vec2(x * CHUNK_WIDTH - (CHUNK_RENDER_DISTANCE * CHUNK_WIDTH) / 2.f, z * CHUNK_WIDTH - (CHUNK_RENDER_DISTANCE * CHUNK_WIDTH) / 2.f));
+				int xPos = x * CHUNK_WIDTH - (CHUNK_RENDER_DISTANCE * CHUNK_WIDTH) / 2.f + origin.z;
+				int zPos = z * CHUNK_WIDTH - (CHUNK_RENDER_DISTANCE * CHUNK_WIDTH) / 2.f + origin.z;
+				chunks[z].emplace_back(glm::vec2(xPos, zPos));
 				chunks[z][x].generateBlocks();
 			}
 		}
@@ -42,14 +47,17 @@ void World::init()
 	gl::enableWireframeDraw();
 
 	camera.updateProjection();
-
-	origin = camera.getPos();
 }
 
 void World::update(float dt)
 {
 	camera.update(dt);
 	camera.updateView();
+
+	if (glfwGetKey(Application::get().getWindow(), GLFW_KEY_LEFT_SHIFT))
+		camera.setSpeed(20);
+	else
+		camera.setSpeed(5);
 
 	glm::vec3 distanceFromOrigin = camera.getPos() - origin;
 

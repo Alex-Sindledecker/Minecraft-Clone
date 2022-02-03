@@ -36,7 +36,7 @@ void FpsCamera::update(float dt)
 	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 	front = glm::normalize(direction);
 
-	const float cameraSpeed = 5 * dt; // adjust accordingly
+	const float cameraSpeed = speed * dt;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		pos += cameraSpeed * front;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -57,15 +57,29 @@ void FpsCamera::updateProjection()
 void FpsCamera::updateView()
 {
 	view = glm::lookAt(pos, pos + front, up);
-	//view = glm::lookAt(glm::vec3(4, 3, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 }
 
-glm::mat4 FpsCamera::getViewProjection() const
+void FpsCamera::setPos(const glm::vec3 newPos)
+{
+	pos = newPos;
+}
+
+void FpsCamera::setSpeed(const float speed)
+{
+	this->speed = speed;
+}
+
+const glm::mat4 FpsCamera::getViewProjection() const
 {
 	return projection * view;
 }
 
-glm::vec3 FpsCamera::getPos()
+const glm::vec3 FpsCamera::getPos() const
 {
 	return pos;
+}
+
+const float FpsCamera::getSpeed() const
+{
+	return speed;
 }
