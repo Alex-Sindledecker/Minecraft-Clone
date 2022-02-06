@@ -5,15 +5,17 @@
 namespace BlockTools
 {
 
-    CompressedBlockVertex createCompressedBlockVertex(unsigned int x, unsigned int y, unsigned int z, unsigned int atlasIndex, unsigned int imageCorner)
+    CompressedBlockVertex createCompressedBlockVertex(uint x, uint y, uint z, uint atlasIndex, uint normal)
     {
         CompressedBlockVertex info = 0;
 
-        info |= imageCorner << 24u;
+        info |= normal << 24u;
         info |= atlasIndex << 16u;
         info |= z << 12u;
         info |= y << 4u;
         info |= x;
+
+        //vec3 normalList[] = vec3[](vec3(1, 0, 0), vec3(-1, 0, 0), vec3(0, 1, 0), vec3(0, -1, 0), vec3(0, 0, 1), vec3(0, 0, -1));
 
         /*
         * Decompresion

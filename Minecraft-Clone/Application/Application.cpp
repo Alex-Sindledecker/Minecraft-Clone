@@ -6,6 +6,7 @@
 #include <iostream>
 
 #include "../Utils/Timer.h"
+#include "../Chunk/TerrainGenerator.h"
 
 const int DEFAULT_WINDOW_WIDTH = 1280;
 const int DEFAULT_WINDOW_HEIGHT = 720;
@@ -40,6 +41,8 @@ int Application::init()
 
 	//OpenGL initialization
 	gl::init((GLADloadproc)glfwGetProcAddress);
+
+	Terrain::setSeed(0);
 }
 
 void Application::run()

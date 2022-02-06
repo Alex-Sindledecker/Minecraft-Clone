@@ -21,7 +21,7 @@ namespace BlockTools
 	{
 		int x, y, z;
 		int atlasIndex;
-		int imageCorner;
+		int normal;
 	};
 
 	//For testing only
@@ -33,13 +33,13 @@ namespace BlockTools
 		info.y = (vertex >> 4) & 0xf;
 		info.z = (vertex >> 8) & 0xf;
 		info.atlasIndex = (vertex >> 12) & 0xff;
-		info.imageCorner = (vertex >> 20) & 0x3;
+		info.normal = (vertex >> 20) & 0x4;
 
 		return info;
 	}
 
 	//Stores x, y, z, and atlasIndex info a single unsigned integer
-	CompressedBlockVertex createCompressedBlockVertex(unsigned int x, unsigned int y, unsigned int z, unsigned int atlasIndex, unsigned int imageCorner);
+	CompressedBlockVertex createCompressedBlockVertex(uint x, uint y, uint z, uint atlasIndex, uint normal);
 	int getLocalBlockIndex(uint8_t x, uint8_t y, uint8_t z);
 	uint8_t getBlockAtlasIndex(Block& block);
 	Block getBlock(BlockList& blockList, BlockList nearChunks[4], int x, int y, int z);

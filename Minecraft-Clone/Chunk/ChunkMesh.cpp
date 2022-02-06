@@ -54,6 +54,9 @@ void ChunkMesh::buildMesh(BlockTools::BlockList& blocks, BlockTools::BlockList n
 			{
 				int i = BlockTools::getLocalBlockIndex(x, y, z);
 
+				if (blocks[i].id == BLOCK_ID_AIR)
+					continue;
+
 				//Vertex compression
 				BlockTools::CompressedBlockVertex vertex0 = BlockTools::createCompressedBlockVertex(x, y, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
 				BlockTools::CompressedBlockVertex vertex1 = BlockTools::createCompressedBlockVertex(x + 1, y, z, BlockTools::getBlockAtlasIndex(blocks[i]), 0);
@@ -68,67 +71,67 @@ void ChunkMesh::buildMesh(BlockTools::BlockList& blocks, BlockTools::BlockList n
 				if (BlockTools::getBlock(blocks, nearChunks, x, y, z - 1).id == BLOCK_ID_AIR)
 				{
 					//Front face
-					blockVertices.push_back(vertex0);
-					blockVertices.push_back(vertex1);
-					blockVertices.push_back(vertex2);
-					blockVertices.push_back(vertex2);
-					blockVertices.push_back(vertex3);
-					blockVertices.push_back(vertex0);
+					blockVertices.push_back(vertex0 | NORMAL_FRONT);
+					blockVertices.push_back(vertex1 | NORMAL_FRONT);
+					blockVertices.push_back(vertex2 | NORMAL_FRONT);
+					blockVertices.push_back(vertex2 | NORMAL_FRONT);
+					blockVertices.push_back(vertex3 | NORMAL_FRONT);
+					blockVertices.push_back(vertex0 | NORMAL_FRONT);
 				}
 				
 				if (BlockTools::getBlock(blocks, nearChunks, x + 1, y, z).id == BLOCK_ID_AIR)
 				{
 					//Right face
-					blockVertices.push_back(vertex1);
-					blockVertices.push_back(vertex5);
-					blockVertices.push_back(vertex6);
-					blockVertices.push_back(vertex6);
-					blockVertices.push_back(vertex2);
-					blockVertices.push_back(vertex1);
+					blockVertices.push_back(vertex1 | NORMAL_RIGHT);
+					blockVertices.push_back(vertex5 | NORMAL_RIGHT);
+					blockVertices.push_back(vertex6 | NORMAL_RIGHT);
+					blockVertices.push_back(vertex6 | NORMAL_RIGHT);
+					blockVertices.push_back(vertex2 | NORMAL_RIGHT);
+					blockVertices.push_back(vertex1 | NORMAL_RIGHT);
 				}
 
 				if (BlockTools::getBlock(blocks, nearChunks, x, y, z + 1).id == BLOCK_ID_AIR)
 				{
 					//Back face
-					blockVertices.push_back(vertex7);
-					blockVertices.push_back(vertex6);
-					blockVertices.push_back(vertex5);
-					blockVertices.push_back(vertex5);
-					blockVertices.push_back(vertex4);
-					blockVertices.push_back(vertex7);
+					blockVertices.push_back(vertex7 | NORMAL_BACK);
+					blockVertices.push_back(vertex6 | NORMAL_BACK);
+					blockVertices.push_back(vertex5 | NORMAL_BACK);
+					blockVertices.push_back(vertex5 | NORMAL_BACK);
+					blockVertices.push_back(vertex4 | NORMAL_BACK);
+					blockVertices.push_back(vertex7 | NORMAL_BACK);
 				}
 
 				if (BlockTools::getBlock(blocks, nearChunks, x - 1, y, z).id == BLOCK_ID_AIR)
 				{
 					//Left face
-					blockVertices.push_back(vertex4);
-					blockVertices.push_back(vertex0);
-					blockVertices.push_back(vertex3);
-					blockVertices.push_back(vertex3);
-					blockVertices.push_back(vertex7);
-					blockVertices.push_back(vertex4);
+					blockVertices.push_back(vertex4 | NORMAL_LEFT);
+					blockVertices.push_back(vertex0 | NORMAL_LEFT);
+					blockVertices.push_back(vertex3 | NORMAL_LEFT);
+					blockVertices.push_back(vertex3 | NORMAL_LEFT);
+					blockVertices.push_back(vertex7 | NORMAL_LEFT);
+					blockVertices.push_back(vertex4 | NORMAL_LEFT);
 				}
 
 				if (BlockTools::getBlock(blocks, nearChunks, x, y - 1, z).id == BLOCK_ID_AIR)
 				{
 					//Bottom face
-					blockVertices.push_back(vertex4);
-					blockVertices.push_back(vertex5);
-					blockVertices.push_back(vertex1);
-					blockVertices.push_back(vertex1);
-					blockVertices.push_back(vertex0);
-					blockVertices.push_back(vertex4);
+					blockVertices.push_back(vertex4 | NORMAL_DOWN);
+					blockVertices.push_back(vertex5 | NORMAL_DOWN);
+					blockVertices.push_back(vertex1 | NORMAL_DOWN);
+					blockVertices.push_back(vertex1 | NORMAL_DOWN);
+					blockVertices.push_back(vertex0 | NORMAL_DOWN);
+					blockVertices.push_back(vertex4 | NORMAL_DOWN);
 				}
 
 				if (BlockTools::getBlock(blocks, nearChunks, x, y + 1, z).id == BLOCK_ID_AIR)
 				{
 					//Top face
-					blockVertices.push_back(vertex3);
-					blockVertices.push_back(vertex2);
-					blockVertices.push_back(vertex6);
-					blockVertices.push_back(vertex6);
-					blockVertices.push_back(vertex7);
-					blockVertices.push_back(vertex3);
+					blockVertices.push_back(vertex3 | NORMAL_UP);
+					blockVertices.push_back(vertex2 | NORMAL_UP);
+					blockVertices.push_back(vertex6 | NORMAL_UP);
+					blockVertices.push_back(vertex6 | NORMAL_UP);
+					blockVertices.push_back(vertex7 | NORMAL_UP);
+					blockVertices.push_back(vertex3 | NORMAL_UP);
 				}
 
 				index += 8;

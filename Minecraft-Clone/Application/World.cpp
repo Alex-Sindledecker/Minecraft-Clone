@@ -15,7 +15,7 @@ World& World::get()
 
 void World::init()
 {
-	camera.setPos(glm::vec3(0, 2, 0));
+	camera.setPos(glm::vec3(0, WORLD_HEIGHT + 10, 0));
 	origin = camera.getPos();
 
 	double blockGenTime = utils::getElapsedTime<utils::Milliseconds>([&]() {
@@ -44,7 +44,7 @@ void World::init()
 	});
 	std::cout << "Chunk generation took: " << chunkGenTime << "ms (~" << chunkGenTime / double(CHUNK_RENDER_DISTANCE * CHUNK_RENDER_DISTANCE) << "ms per Chunk)" << std::endl;
 
-	gl::enableWireframeDraw();
+	//gl::enableWireframeDraw();
 
 	camera.updateProjection();
 }
@@ -62,18 +62,28 @@ void World::update(float dt)
 	glm::vec3 distanceFromOrigin = camera.getPos() - origin;
 
 	if (distanceFromOrigin.x > CHUNK_WIDTH)
-		cycleChunksX(1);
+	{
+		double time = utils::getElapsedTime<utils::Milliseconds>([&]() {cycleChunksX(1); });
+		std::cout << "Chunk line generation took: " << time << "ms (~" << time / double(CHUNK_RENDER_DISTANCE) << "ms per Chunk)" << std::endl;
+	}
 
 	else if (-distanceFromOrigin.x > CHUNK_WIDTH)
-		cycleChunksX(-1);
+	{
+		double time = utils::getElapsedTime<utils::Milliseconds>([&]() {cycleChunksX(-1); });
+		std::cout << "Chunk line generation took: " << time << "ms (~" << time / double(CHUNK_RENDER_DISTANCE) << "ms per Chunk)" << std::endl;
+	}
 
 	if (distanceFromOrigin.z > CHUNK_WIDTH)
-		cycleChunksZ(1);
+	{
+		double time = utils::getElapsedTime<utils::Milliseconds>([&]() {cycleChunksZ(1); });
+		std::cout << "Chunk line generation took: " << time << "ms (~" << time / double(CHUNK_RENDER_DISTANCE) << "ms per Chunk)" << std::endl;
+	}
 
 	else if (-distanceFromOrigin.z > CHUNK_WIDTH)
-		cycleChunksZ(-1);
-
-	std::cout << camera.getPos().x << ", " << camera.getPos().z << std::endl;
+	{
+		double time = utils::getElapsedTime<utils::Milliseconds>([&]() {cycleChunksZ(-1); });
+		std::cout << "Chunk line generation took: " << time << "ms (~" << time / double(CHUNK_RENDER_DISTANCE) << "ms per Chunk)" << std::endl;
+	}
 }
 
 void World::render()

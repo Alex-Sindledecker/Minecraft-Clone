@@ -1,5 +1,7 @@
 #include "Chunk.h"
 
+#include "TerrainGenerator.h"
+
 Chunk::Chunk(glm::vec2 pos)
 	: pos(pos)
 {
@@ -36,7 +38,8 @@ void Chunk::generateBlocks()
 			{
 				int i = BlockTools::getLocalBlockIndex(x, y, z);
 
-				blocks[i].id = BLOCK_ID_GRASS;
+				blocks[i] = Terrain::getBlock(x + pos.x, y, z + pos.y);
+				//blocks[i] = { BLOCK_ID_GRASS, 0 };
 			}
 		}
 	}
