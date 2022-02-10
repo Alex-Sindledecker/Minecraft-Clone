@@ -125,7 +125,6 @@ void Application::worldSelectProc(float dt)
 void Application::worldCreateProc(float dt)
 {
 	double worldGenTime = utils::getElapsedTime<utils::Milliseconds>([&]() { world.init(); });
-
 	std::cout << "World generation took: " << utils::millisecondsToSeconds(worldGenTime) << "s (" << CHUNK_RENDER_DISTANCE * CHUNK_RENDER_DISTANCE * CHUNK_WIDTH * CHUNK_WIDTH * WORLD_HEIGHT << " blocks)" << std::endl;
 
 	gameState = GameState::Active;

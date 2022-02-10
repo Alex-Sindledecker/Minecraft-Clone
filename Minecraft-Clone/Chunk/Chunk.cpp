@@ -2,6 +2,8 @@
 
 #include "TerrainGenerator.h"
 
+#include <iostream>
+
 Chunk::Chunk(glm::vec2 pos)
 	: pos(pos)
 {
@@ -47,11 +49,11 @@ void Chunk::generateBlocks()
 
 void Chunk::buildMesh(Chunk* left, Chunk* right, Chunk* front, Chunk* back)
 {
-	BlockTools::BlockList near[4] = { left == nullptr ? BlockTools::BlockList{} : left->blocks,
-									  right == nullptr ? BlockTools::BlockList{} : right->blocks,
-									  front == nullptr ? BlockTools::BlockList{} : front->blocks,
-									  back == nullptr ? BlockTools::BlockList{} : back->blocks };
-	mesh.buildMesh(blocks, near);
+	BlockTools::BlockList* near[4] = { left == nullptr ? nullptr : &left->blocks,
+									  right == nullptr ? nullptr : &right->blocks,
+									  front == nullptr ? nullptr : &front->blocks,
+									  back == nullptr ? nullptr : &back->blocks };
+	mesh.buildMesh(&blocks, near);
 }
 
 void Chunk::render(const FpsCamera& camera)

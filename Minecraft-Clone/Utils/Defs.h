@@ -4,7 +4,7 @@ typedef unsigned int uint;
 
 constexpr int CHUNK_WIDTH = 15;
 constexpr int WORLD_HEIGHT = 255;
-constexpr int CHUNK_RENDER_DISTANCE = 30;
+constexpr int CHUNK_RENDER_DISTANCE = 15;
 
 constexpr uint ATLAS_SIZE = 256;
 constexpr uint ATLAS_IMAGE_SIZE = 16;

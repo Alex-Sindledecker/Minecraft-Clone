@@ -39,22 +39,22 @@ namespace BlockTools
         return block.id - 1;
     }
 
-    Block getBlock(BlockList& blockList, BlockList nearChunks[4], int x, int y, int z)
+    Block getBlock(BlockList* blockList, BlockList* lBlocks, BlockList* rBlocks, BlockList* fBlocks, BlockList* bBlocks, int x, int y, int z)
     {
-        if (x < 0 && nearChunks[LEFT_BLOCK].size() > 0)
-            return nearChunks[LEFT_BLOCK][getLocalBlockIndex(CHUNK_WIDTH - 1, y, z)];
-        else if (x >= CHUNK_WIDTH && nearChunks[RIGHT_BLOCK].size() > 0)
-            return nearChunks[RIGHT_BLOCK][getLocalBlockIndex(0, y, z)];
+        if (x < 0 && lBlocks != nullptr)
+            return lBlocks->at(getLocalBlockIndex(CHUNK_WIDTH - 1, y, z));
+        else if (x >= CHUNK_WIDTH && rBlocks != nullptr)
+            return rBlocks->at(getLocalBlockIndex(0, y, z));
 
-        if (z < 0 && nearChunks[BACK_BLOCK].size() > 0)
-            return nearChunks[BACK_BLOCK][getLocalBlockIndex(x, y, CHUNK_WIDTH - 1)];
-        else if (z >= CHUNK_WIDTH && nearChunks[FRONT_BLOCK].size() > 0)
-            return nearChunks[FRONT_BLOCK][getLocalBlockIndex(x, y, 0)];
+        if (z < 0 && bBlocks != nullptr)
+            return bBlocks->at(getLocalBlockIndex(x, y, CHUNK_WIDTH - 1));
+        else if (z >= CHUNK_WIDTH && fBlocks != nullptr)
+            return fBlocks->at(getLocalBlockIndex(x, y, 0));
 
         if (x < 0 || x >= CHUNK_WIDTH || y < 0 || y >= WORLD_HEIGHT || z < 0 || z >= CHUNK_WIDTH)
             return { BLOCK_ID_AIR, 0 };
 
-        return blockList[getLocalBlockIndex(x, y, z)];
+        return blockList->at(getLocalBlockIndex(x, y, z));
     }
 
 }

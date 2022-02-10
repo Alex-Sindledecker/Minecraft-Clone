@@ -42,5 +42,5 @@ namespace BlockTools
 	CompressedBlockVertex createCompressedBlockVertex(uint x, uint y, uint z, uint atlasIndex, uint normal);
 	int getLocalBlockIndex(uint8_t x, uint8_t y, uint8_t z);
 	uint8_t getBlockAtlasIndex(Block& block);
-	Block getBlock(BlockList& blockList, BlockList nearChunks[4], int x, int y, int z);
+	Block getBlock(BlockList* blockList, BlockList* lBlocks, BlockList* rBlocks, BlockList* fBlocks, BlockList* bBlocks, int x, int y, int z);
 }
